@@ -392,3 +392,75 @@ Study these nestable element implementations as reference:
 - **Tabs (Nestable)** - `includes/elements/tabs-nested.php`
 
 These examples demonstrate the patterns and structure for creating custom nestable elements in Bricks Builder.
+
+---
+
+## Advanced Themer Integration
+
+### Accessing AT Color Data
+
+The primary method to access Advanced Themer colors:
+
+```php
+$palettes = get_option('bricks_color_palette', []);
+```
+
+### Color Palette Structure
+
+Each palette in the array contains:
+
+```php
+[
+    'id'     => 'brxc_color_12345678',  // Unique palette ID
+    'name'   => 'Primary Colors',       // Palette display name
+    'prefix' => 'primary',              // CSS variable prefix
+    'status' => 'enabled',              // 'enabled' or 'disabled'
+    'colors' => [
+        [
+            'name'          => 'blue',
+            'id'            => 'brxc_color_blue',
+            'raw'           => 'var(--primary-blue)',      // CSS variable reference
+            'hex'           => '#0066FF',                   // Hex value (when available)
+            'rawValue'      => [
+                'light' => '#0066FF',                      // Light mode value
+                'dark'  => '#003366'                       // Dark mode value
+            ],
+            'shadeChildren' => true,                       // Has variations
+        ]
+    ]
+]
+```
+
+### Color Variations/Shades
+
+When `shadeChildren` is enabled on a color, AT generates these variations:
+- **Light shades:** `l-1`, `l-2`, `l-3`, `l-4`, `l-5`, `l-6`
+- **Dark shades:** `d-1`, `d-2`, `d-3`, `d-4`, `d-5`, `d-6`
+
+### Available Filter Hook
+
+```php
+// Modify palette settings before processing
+apply_filters('at/color_palettes/override_palette_settings', $palette);
+```
+
+### Key AT Classes
+
+- `AT__Global_Colors::load_colors_variables_on_frontend()` - Returns [light_css, dark_css, gutenberg_colors]
+- `AT__Global_Colors::load_converted_colors_variables_on_frontend()` - Returns CSS with HSL values
+
+### Storage Locations
+
+- **WordPress Option:** `bricks_color_palette`
+- **Custom Post Type:** `brxc_color_palette` (not REST exposed)
+
+### Source Code Reference
+
+For understanding Advanced Themer internals, refer to:
+
+`C:\Users\Alan.Blair\LIBRARIES\wordpress\wp-content\plugins\bricks-advanced-themer`
+
+Key files:
+- `classes/global_colors.php` - Main color management class
+- `classes/acf.php` - ACF field definitions (line 1308+)
+- `classes/ajax.php` - AJAX handlers for import/export

@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+vendor/
 
 # Build output (uncomment if you want to commit dist files)
 # assets/svelte/dist/

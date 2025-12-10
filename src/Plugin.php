@@ -22,14 +22,14 @@ class Plugin {
 	 *
 	 * @var Plugin|null
 	 */
-	private static $instance = null;
+	private static ?Plugin $instance = null;
 
 	/**
 	 * Get plugin instance.
 	 *
 	 * @return Plugin
 	 */
-	public static function get_instance() {
+	public static function get_instance(): Plugin {
 		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
@@ -48,7 +48,7 @@ class Plugin {
 	 *
 	 * @return void
 	 */
-	private function init_hooks() {
+	private function init_hooks(): void {
 		// Register Bricks elements.
 		add_action( 'init', [ $this, 'register_bricks_elements' ], 11 );
 
@@ -61,32 +61,22 @@ class Plugin {
 	 *
 	 * @return void
 	 */
-	public function register_bricks_elements() {
+	public function register_bricks_elements(): void {
 		// Check if Bricks elements class exists.
 		if ( ! class_exists( '\Bricks\Elements' ) ) {
 			return;
 		}
 
-		// Include element files.
-		$elements_dir = AT_STYLE_GUIDE_PLUGIN_DIR . 'includes/elements/';
+		// Register elements.
+		$elements = [
+			'color-swatch' => Elements\ColorSwatch::class,
+		];
 
-		// Register each element.
-		$element_files = glob( $elements_dir . 'class-element-*.php' );
+		foreach ( $elements as $name => $class ) {
+			$file = AT_STYLE_GUIDE_PLUGIN_DIR . 'src/Elements/' . str_replace( '_', '', ucwords( str_replace( '-', '_', $name ), '_' ) ) . '.php';
 
-		if ( $element_files ) {
-			foreach ( $element_files as $element_file ) {
-				require_once $element_file;
-
-				// Get class name from file name.
-				$file_name  = basename( $element_file, '.php' );
-				$class_name = str_replace( 'class-element-', '', $file_name );
-				$class_name = str_replace( '-', '_', $class_name );
-				$class_name = 'Element_' . ucwords( $class_name, '_' );
-				$full_class = __NAMESPACE__ . '\\' . $class_name;
-
-				if ( class_exists( $full_class ) ) {
-					\Bricks\Elements::register_element( $element_file, $class_name, $full_class );
-				}
+			if ( class_exists( $class ) ) {
+				\Bricks\Elements::register_element( $file, $name, $class );
 			}
 		}
 	}
@@ -96,7 +86,7 @@ class Plugin {
 	 *
 	 * @return void
 	 */
-	public function enqueue_frontend_assets() {
+	public function enqueue_frontend_assets(): void {
 		// Only load on frontend when Bricks is rendering.
 		if ( ! function_exists( 'bricks_is_builder_preview' ) ) {
 			return;

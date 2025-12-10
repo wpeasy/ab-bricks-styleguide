@@ -1,5 +1,15 @@
 # CLAUDE.md – Advanced Themer Style Guide
 
+## Required Reading
+
+Before working on this project, you MUST read the following documentation file:
+
+- **SVELTE5_IMPLEMENTATION.md** - Svelte 5 implementation details, runes system, WordPress integration patterns, and Vite build configuration
+
+This file contains essential context about Svelte 5 patterns used in this project.
+
+---
+
 ## Purpose
 
 The **Advanced Themer Style Guide** plugin adds Svelte-based custom elements to the **Bricks Builder** editor to visually document and verify a site's design system, with a focus on setups using **Advanced Themer**.

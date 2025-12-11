@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Advanced Themer Style Guide
  * Description: Adds Svelte based Elements to Bricks Builder for creating Style Guides based on Advanced Themer
- * Version: 0.0.2-beta
+ * Version: 0.0.3-beta
  * Author: WP Easy
  * Author URI: https://wpeasy.au
  * License: GPL v2 or later
@@ -19,7 +19,7 @@ namespace AB\ATStyleGuide;
 defined( 'ABSPATH' ) || exit;
 
 // Plugin constants.
-define( 'AT_STYLE_GUIDE_VERSION', '0.0.2-beta' );
+define( 'AT_STYLE_GUIDE_VERSION', '0.0.3-beta' );
 define( 'AT_STYLE_GUIDE_PLUGIN_FILE', __FILE__ );
 define( 'AT_STYLE_GUIDE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'AT_STYLE_GUIDE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

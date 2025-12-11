@@ -2,6 +2,12 @@
 
 All notable changes to Advanced Themer Style Guide will be documented in this file.
 
+## [0.0.3-beta] - 2025-12-11
+
+### Fixed
+- ZIP packaging now uses forward slashes for Linux/Unix compatibility
+- ZIP script no longer incorrectly excludes src/Plugin.php
+
 ## [0.0.2-beta] - 2025-12-11
 
 ### Added

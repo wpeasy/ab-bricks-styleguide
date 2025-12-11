@@ -42,48 +42,45 @@ $excludePatterns = @(
     ".claude"
 )
 
-# Create temporary directory for ZIP contents
-$tempDir = "$env:TEMP\$pluginName-zip-temp"
-if (Test-Path $tempDir) {
-    Remove-Item -Recurse -Force $tempDir
-}
-New-Item -ItemType Directory -Path "$tempDir\$pluginName" | Out-Null
-
-# Copy files excluding patterns
-$files = Get-ChildItem -Path $pluginDir -Recurse -File
-foreach ($file in $files) {
-    $relativePath = $file.FullName.Substring($pluginDir.Length + 1)
-    $exclude = $false
-
-    foreach ($pattern in $excludePatterns) {
-        if ($relativePath -like "*$pattern*" -or $file.Name -like $pattern) {
-            $exclude = $true
-            break
-        }
-    }
-
-    if (!$exclude) {
-        $destPath = "$tempDir\$pluginName\$relativePath"
-        $destDir = Split-Path -Parent $destPath
-        if (!(Test-Path $destDir)) {
-            New-Item -ItemType Directory -Path $destDir -Force | Out-Null
-        }
-        Copy-Item $file.FullName -Destination $destPath
-    }
-}
-
-# Create ZIP using .NET with forward slashes
+# Load compression assembly
+Add-Type -Assembly System.IO.Compression
 Add-Type -Assembly System.IO.Compression.FileSystem
-$compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal
 
-if (Test-Path $zipPath) {
-    Remove-Item $zipPath -Force
+# Create ZIP file with forward slashes
+$zipFile = [System.IO.Compression.ZipFile]::Open($zipPath, [System.IO.Compression.ZipArchiveMode]::Create)
+
+try {
+    # Get all files
+    $files = Get-ChildItem -Path $pluginDir -Recurse -File
+
+    foreach ($file in $files) {
+        $relativePath = $file.FullName.Substring($pluginDir.Length + 1)
+        $exclude = $false
+
+        foreach ($pattern in $excludePatterns) {
+            if ($relativePath -like "*$pattern*" -or $file.Name -like $pattern) {
+                $exclude = $true
+                break
+            }
+        }
+
+        if (!$exclude) {
+            # Create entry path with forward slashes: pluginname/path/to/file
+            $entryPath = "$pluginName/$($relativePath -replace '\\', '/')"
+
+            # Add file to ZIP
+            [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile(
+                $zipFile,
+                $file.FullName,
+                $entryPath,
+                [System.IO.Compression.CompressionLevel]::Optimal
+            ) | Out-Null
+        }
+    }
 }
-
-[System.IO.Compression.ZipFile]::CreateFromDirectory($tempDir, $zipPath, $compressionLevel, $false)
-
-# Clean up temp directory
-Remove-Item -Recurse -Force $tempDir
+finally {
+    $zipFile.Dispose()
+}
 
 Write-Host "Created: $zipPath"
 Write-Host "Plugin: $pluginName v$version"

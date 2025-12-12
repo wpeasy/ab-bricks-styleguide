@@ -306,7 +306,8 @@ class BoxShadowsItem extends \Bricks\Element {
 			.atsg-shadows-item__box {
 				width: 7.5em;
 				height: 7.5em;
-				background-color: var(--at-white, #ffffff);
+				background-color: var(--at-neutral-t-5, #e5e7eb);
+				border: 2px solid var(--at-neutral-t-4, #d1d5db);
 				border-radius: 0.5em;
 			}
 

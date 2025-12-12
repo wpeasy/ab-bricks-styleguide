@@ -305,7 +305,6 @@ class BoxShadows extends \Bricks\Element {
 	 */
 	public function get_nestable_children(): array {
 		$default_items = [
-			[ 'label' => 'XS', 'variable' => '--at-shadow--xs' ],
 			[ 'label' => 'S', 'variable' => '--at-shadow--s' ],
 			[ 'label' => 'M', 'variable' => '--at-shadow--m' ],
 			[ 'label' => 'L', 'variable' => '--at-shadow--l' ],

@@ -536,7 +536,7 @@ class ColorsItem extends \Bricks\Element {
 				left: 50%;
 				transform: translate(-50%, -50%);
 				background: rgba(0, 0, 0, 0.7);
-				color: #fff;
+				color: var(--at-white, #ffffff);
 				font-size: 10px;
 				font-weight: 600;
 				text-transform: uppercase;
@@ -556,10 +556,10 @@ class ColorsItem extends \Bricks\Element {
 			/* Transparency pattern background for transparent swatches */
 			.atsg-colors-item__column:last-child .atsg-colors-item__swatch {
 				background-image:
-					linear-gradient(45deg, #ccc 25%, transparent 25%),
-					linear-gradient(-45deg, #ccc 25%, transparent 25%),
-					linear-gradient(45deg, transparent 75%, #ccc 75%),
-					linear-gradient(-45deg, transparent 75%, #ccc 75%);
+					linear-gradient(45deg, var(--at-neutral-t-4, #d1d5db) 25%, transparent 25%),
+					linear-gradient(-45deg, var(--at-neutral-t-4, #d1d5db) 25%, transparent 25%),
+					linear-gradient(45deg, transparent 75%, var(--at-neutral-t-4, #d1d5db) 75%),
+					linear-gradient(-45deg, transparent 75%, var(--at-neutral-t-4, #d1d5db) 75%);
 				background-size: 8px 8px;
 				background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
 			}
@@ -790,11 +790,11 @@ class ColorsItem extends \Bricks\Element {
 			}
 
 			.atsg-colors-item__contrast-badge--white {
-				color: #ffffff;
+				color: #ffffff; /* Fixed: literal white for A11Y contrast testing */
 			}
 
 			.atsg-colors-item__contrast-badge--black {
-				color: #000000;
+				color: #000000; /* Fixed: literal black for A11Y contrast testing */
 			}
 
 			/* Pass - green background */

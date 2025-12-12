@@ -87,6 +87,44 @@
 	window.getOriginalCSSValue = getOriginalCSSValue;
 
 	/**
+	 * Round a CSS pixel value to 2 decimal places.
+	 *
+	 * @param {string} value - CSS value like "16.123456px" or "normal".
+	 * @returns {string} Rounded value like "16.12px" or original if not a px value.
+	 */
+	function roundPxValue(value) {
+		if (!value || typeof value !== 'string') return value;
+
+		const pxMatch = value.match(/^([\d.]+)px$/);
+		if (pxMatch) {
+			const num = parseFloat(pxMatch[1]);
+			const rounded = Math.round(num * 100) / 100;
+			return rounded + 'px';
+		}
+		return value;
+	}
+
+	/**
+	 * Round all px values within a complex CSS string to 2 decimal places.
+	 * Useful for box-shadow, etc.
+	 *
+	 * @param {string} value - CSS value like "rgb(0,0,0) 0px 4.5678px 6px".
+	 * @returns {string} String with all px values rounded.
+	 */
+	function roundAllPxValues(value) {
+		if (!value || typeof value !== 'string') return value;
+
+		return value.replace(/([\d.]+)px/g, (match, num) => {
+			const rounded = Math.round(parseFloat(num) * 100) / 100;
+			return rounded + 'px';
+		});
+	}
+
+	// Make functions available globally
+	window.roundPxValue = roundPxValue;
+	window.roundAllPxValues = roundAllPxValues;
+
+	/**
 	 * Initialize all elements on the frontend.
 	 */
 	function initAllElements() {
@@ -164,7 +202,7 @@ function atTypographyItemInit() {
 			}
 
 			if (sizeEl) {
-				sizeEl.textContent = computed.fontSize;
+				sizeEl.textContent = roundPxValue(computed.fontSize);
 			}
 
 			if (lineHeightEl) {
@@ -186,7 +224,7 @@ function atTypographyItemInit() {
 
 			if (spacingEl) {
 				const spacing = computed.letterSpacing;
-				spacingEl.textContent = spacing === 'normal' ? '0' : spacing;
+				spacingEl.textContent = spacing === 'normal' ? '0' : roundPxValue(spacing);
 			}
 
 			if (colorEl) {
@@ -245,7 +283,7 @@ function atSpacingItemInit() {
 			const size = isVertical ? computed.height : computed.width;
 
 			if (computedEl) {
-				computedEl.textContent = size;
+				computedEl.textContent = roundPxValue(size);
 			}
 		};
 
@@ -275,7 +313,7 @@ function atRadiiItemInit() {
 		if (!box || !computedEl) return;
 
 		const computed = window.getComputedStyle(box);
-		computedEl.textContent = computed.borderRadius;
+		computedEl.textContent = roundPxValue(computed.borderRadius);
 	});
 }
 
@@ -300,7 +338,7 @@ function atBoxShadowsItemInit() {
 		if (!box || !computedEl) return;
 
 		const computed = window.getComputedStyle(box);
-		computedEl.textContent = computed.boxShadow;
+		computedEl.textContent = roundAllPxValues(computed.boxShadow);
 	});
 }
 

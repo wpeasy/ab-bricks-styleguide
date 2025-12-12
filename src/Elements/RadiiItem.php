@@ -305,7 +305,7 @@ class RadiiItem extends \Bricks\Element {
 				width: 6.25em;
 				height: 6.25em;
 				background-color: var(--at-neutral-t-5, #e5e7eb);
-				border: 2px solid #9ca3af;
+				border: 2px solid var(--at-neutral-t-4, #d1d5db);
 			}
 
 			.atsg-radii-item__info {

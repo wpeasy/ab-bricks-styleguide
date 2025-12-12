@@ -2,6 +2,18 @@
 
 All notable changes to Advanced Themer Style Guide will be documented in this file.
 
+## [0.0.7-beta] - 2025-12-12
+
+### Added
+- Computed values now rounded to 2 decimal places (font-size, spacing, radii, box-shadow)
+
+### Fixed
+- **Box Shadows & Radii**: Box backgrounds now visible on dark backgrounds using CSS variables
+- **All Elements**: Replaced fixed hex colors with CSS variables (except A11Y contrast badges)
+
+### Changed
+- **Box Shadows Element**: Removed XS size from default items
+
 ## [0.0.6-beta] - 2025-12-12
 
 ### Added

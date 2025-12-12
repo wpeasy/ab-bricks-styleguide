@@ -99,6 +99,22 @@ class Typography extends \Bricks\Element {
 	 * @return void
 	 */
 	public function set_controls(): void {
+		// Base font size control.
+		$this->controls['baseFontSize'] = [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Base Font Size', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'default'     => 'var(--at-text--s)',
+			'css'         => [
+				[
+					'property' => 'font-size',
+					'selector' => '',
+				],
+			],
+			'description' => esc_html__( 'Base font size for UI components. Sample text uses its own styled size.', 'advanced-themer-style-guide' ),
+		];
+
 		// Layout controls.
 		$this->controls['layout'] = [
 			'group'   => 'layout',
@@ -113,12 +129,12 @@ class Typography extends \Bricks\Element {
 		];
 
 		$this->controls['gap'] = [
-			'group'   => 'layout',
-			'label'   => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '2rem',
-			'css'     => [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => '2em',
+			'css'         => [
 				[
 					'property' => 'gap',
 					'selector' => '',
@@ -178,6 +194,30 @@ class Typography extends \Bricks\Element {
 		$this->controls['hideLetterSpacing'] = [
 			'group'    => 'displayOverride',
 			'label'    => esc_html__( 'Hide Letter Spacing', 'advanced-themer-style-guide' ),
+			'type'     => 'checkbox',
+			'rerender' => true,
+			'required' => [ 'overrideChildDisplay', '!=', '' ],
+		];
+
+		$this->controls['hideColor'] = [
+			'group'    => 'displayOverride',
+			'label'    => esc_html__( 'Hide Color', 'advanced-themer-style-guide' ),
+			'type'     => 'checkbox',
+			'rerender' => true,
+			'required' => [ 'overrideChildDisplay', '!=', '' ],
+		];
+
+		$this->controls['hideTextTransform'] = [
+			'group'    => 'displayOverride',
+			'label'    => esc_html__( 'Hide Text Transform', 'advanced-themer-style-guide' ),
+			'type'     => 'checkbox',
+			'rerender' => true,
+			'required' => [ 'overrideChildDisplay', '!=', '' ],
+		];
+
+		$this->controls['hideFontStyle'] = [
+			'group'    => 'displayOverride',
+			'label'    => esc_html__( 'Hide Font Style', 'advanced-themer-style-guide' ),
 			'type'     => 'checkbox',
 			'rerender' => true,
 			'required' => [ 'overrideChildDisplay', '!=', '' ],
@@ -271,6 +311,19 @@ class Typography extends \Bricks\Element {
 				],
 			],
 		];
+
+		// Item background.
+		$this->controls['itemBackground'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Item Background', 'advanced-themer-style-guide' ),
+			'type'  => 'color',
+			'css'   => [
+				[
+					'property' => 'background-color',
+					'selector' => '.atsg-typography-item',
+				],
+			],
+		];
 	}
 
 	/**
@@ -285,9 +338,10 @@ class Typography extends \Bricks\Element {
 			'name'     => 'at-typography-item',
 			'label'    => esc_html__( 'Typography Item', 'advanced-themer-style-guide' ),
 			'settings' => [
-				'label'      => '{item_label}',
-				'tag'        => '{item_tag}',
-				'sampleText' => 'The quick brown fox jumps over the lazy dog',
+				'label'       => '{item_label}',
+				'tag'         => '{item_tag}',
+				'sampleText'  => 'The quick brown fox jumps over the lazy dog',
+				'sampleClass' => '{item_class}',
 			],
 		];
 	}
@@ -295,21 +349,20 @@ class Typography extends \Bricks\Element {
 	/**
 	 * Get nestable children.
 	 *
-	 * Generates the default set of typography items (H1-H6, Body, Lead, Small).
+	 * Generates the default set of typography items (H1-H6, Body, Small).
 	 *
 	 * @return array
 	 */
 	public function get_nestable_children(): array {
 		$default_items = [
-			[ 'label' => 'Heading 1', 'tag' => 'h1' ],
-			[ 'label' => 'Heading 2', 'tag' => 'h2' ],
-			[ 'label' => 'Heading 3', 'tag' => 'h3' ],
-			[ 'label' => 'Heading 4', 'tag' => 'h4' ],
-			[ 'label' => 'Heading 5', 'tag' => 'h5' ],
-			[ 'label' => 'Heading 6', 'tag' => 'h6' ],
-			[ 'label' => 'Body', 'tag' => 'p' ],
-			[ 'label' => 'Lead', 'tag' => 'p' ],
-			[ 'label' => 'Small', 'tag' => 'span' ],
+			[ 'label' => 'Heading 1', 'tag' => 'h1', 'class' => '' ],
+			[ 'label' => 'Heading 2', 'tag' => 'h2', 'class' => '' ],
+			[ 'label' => 'Heading 3', 'tag' => 'h3', 'class' => '' ],
+			[ 'label' => 'Heading 4', 'tag' => 'h4', 'class' => '' ],
+			[ 'label' => 'Heading 5', 'tag' => 'h5', 'class' => '' ],
+			[ 'label' => 'Heading 6', 'tag' => 'h6', 'class' => '' ],
+			[ 'label' => 'Body', 'tag' => 'p', 'class' => '' ],
+			[ 'label' => 'Small', 'tag' => 'span', 'class' => 'text--xs' ],
 		];
 
 		$children = [];
@@ -321,6 +374,7 @@ class Typography extends \Bricks\Element {
 			$child       = wp_json_encode( $child );
 			$child       = str_replace( '{item_label}', $item['label'], $child );
 			$child       = str_replace( '{item_tag}', $item['tag'], $child );
+			$child       = str_replace( '{item_class}', $item['class'], $child );
 			$child       = json_decode( $child, true );
 			$children[]  = $child;
 		}
@@ -363,6 +417,9 @@ class Typography extends \Bricks\Element {
 				'hideLineHeight',
 				'hideFontWeight',
 				'hideLetterSpacing',
+				'hideColor',
+				'hideTextTransform',
+				'hideFontStyle',
 				'hideValueLabels',
 			];
 
@@ -411,14 +468,14 @@ class Typography extends \Bricks\Element {
 			.atsg-typography {
 				display: flex;
 				flex-direction: column;
-				gap: var(--at-space--l, 2rem);
+				gap: 2em;
 			}
 
 			.atsg-typography__placeholder {
-				padding: var(--at-space--l, 2rem);
+				padding: 2em;
 				background: var(--at-neutral-t-6, #f3f4f6);
-				border: var(--at-border-width, 2px) dashed var(--at-border-color, #d1d5db);
-				border-radius: var(--at-radius--s, 8px);
+				border: 2px dashed var(--at-border-color, #d1d5db);
+				border-radius: 0.5em;
 				text-align: center;
 				color: var(--at-neutral-d-2, #6b7280);
 			}
@@ -440,20 +497,20 @@ class Typography extends \Bricks\Element {
 			.atsg-typography--table .atsg-typography-item__sample-wrapper,
 			.atsg-typography--table .atsg-typography-item__meta {
 				display: table-cell;
-				padding: var(--at-space--s, 1rem);
+				padding: 1em;
 				vertical-align: middle;
-				border-block-end: var(--at-border--standard, 1px solid var(--at-border-color, #e5e7eb));
+				border-block-end: 1px solid var(--at-border-color, #e5e7eb);
 			}
 
 			.atsg-typography--table .atsg-typography-item__label {
-				width: 100px;
+				width: 6.25em;
 			}
 
 			.atsg-typography--table .atsg-typography-item__meta {
-				width: 200px;
+				width: 12.5em;
 				flex-direction: column;
 				align-items: flex-start;
-				gap: var(--at-space--3xs, 0.25rem);
+				gap: 0.25em;
 				text-align: left;
 			}
 
@@ -467,16 +524,16 @@ class Typography extends \Bricks\Element {
 				.atsg-typography--table {
 					display: flex !important;
 					flex-direction: column;
-					gap: var(--at-space--l, 2rem);
+					gap: 2em;
 				}
 
 				.atsg-typography--table .atsg-typography-item {
 					display: flex !important;
 					flex-direction: column;
-					gap: var(--at-space--xs, 0.5rem);
+					gap: 0.5em;
 					padding: 0;
-					padding-block-end: var(--at-space--m, 1.5rem);
-					border-block-end: var(--at-border--standard, 1px solid var(--at-border-color, #e5e7eb));
+					padding-block-end: 1.5em;
+					border-block-end: 1px solid var(--at-border-color, #e5e7eb);
 				}
 
 				.atsg-typography--table .atsg-typography-item__label,
@@ -497,7 +554,7 @@ class Typography extends \Bricks\Element {
 			/* Style: Minimal */
 			.atsg-typography--minimal .atsg-typography-item {
 				border-block-end: none;
-				padding-block-end: var(--at-space--s, 0.75rem);
+				padding-block-end: 0.75em;
 			}
 
 			.atsg-typography--minimal .atsg-typography-item__label {
@@ -510,7 +567,7 @@ class Typography extends \Bricks\Element {
 
 			/* Style: Bold */
 			.atsg-typography--bold .atsg-typography-item__label {
-				font-size: var(--at-text--s, 0.875rem);
+				font-size: 0.875em;
 				font-weight: 700;
 				text-transform: none;
 				color: var(--at-neutral-d-4, #1f2937);
@@ -536,21 +593,21 @@ class Typography extends \Bricks\Element {
 
 			/* Style: Compact */
 			.atsg-typography--compact {
-				gap: var(--at-space--xs, 0.5rem);
+				gap: 0.5em;
 			}
 
 			.atsg-typography--compact .atsg-typography-item {
-				gap: var(--at-space--3xs, 0.25rem);
-				padding-block-end: var(--at-space--xs, 0.5rem);
+				gap: 0.25em;
+				padding-block-end: 0.5em;
 			}
 
 			.atsg-typography--compact .atsg-typography-item__label {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 			}
 
 			.atsg-typography--compact .atsg-typography-item__meta {
-				gap: var(--at-space--xs, 0.5rem);
-				font-size: var(--at-text--xs, 0.75rem);
+				gap: 0.5em;
+				font-size: 0.75em;
 			}
 
 			/* Parent override styles - hide elements based on parent data attributes */
@@ -575,6 +632,18 @@ class Typography extends \Bricks\Element {
 			}
 
 			.atsg-typography[data-override="true"][data-hide-letter-spacing="true"] .atsg-typography-item__letter-spacing {
+				display: none;
+			}
+
+			.atsg-typography[data-override="true"][data-hide-color="true"] .atsg-typography-item__color {
+				display: none;
+			}
+
+			.atsg-typography[data-override="true"][data-hide-text-transform="true"] .atsg-typography-item__text-transform {
+				display: none;
+			}
+
+			.atsg-typography[data-override="true"][data-hide-font-style="true"] .atsg-typography-item__font-style {
 				display: none;
 			}
 

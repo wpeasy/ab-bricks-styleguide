@@ -2,6 +2,22 @@
 
 All notable changes to Advanced Themer Style Guide will be documented in this file.
 
+## [0.0.5-beta] - 2025-12-12
+
+### Added
+- **Typography Element**: Item Background control with parent override for consistent styling
+- **Typography Element**: Class control for sample text to apply custom CSS classes
+- **All Parent Elements**: Base Font Size now defaults to `var(--at-text--s)` for consistent sizing
+
+### Fixed
+- **Spacing Element**: Bar Thickness control now properly applies in both horizontal and vertical layouts
+- **Typography Element**: Border and border-radius from parent now apply correctly to items
+- **Typography Element**: Sample text no longer inherits Base Font Size (uses `font-size: revert`)
+
+### Changed
+- **Typography Element**: Removed "Lead" from default typography items
+- **Typography Element**: Default "Small" item now includes `text--xs` class
+
 ## [0.0.4-beta] - 2025-12-11
 
 ### Added

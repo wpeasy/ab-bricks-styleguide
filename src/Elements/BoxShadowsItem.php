@@ -82,6 +82,11 @@ class BoxShadowsItem extends \Bricks\Element {
 			'title' => esc_html__( 'Box Style', 'advanced-themer-style-guide' ),
 			'tab'   => 'content',
 		];
+
+		$this->control_groups['typography'] = [
+			'title' => esc_html__( 'Typography', 'advanced-themer-style-guide' ),
+			'tab'   => 'content',
+		];
 	}
 
 	/**
@@ -142,7 +147,7 @@ class BoxShadowsItem extends \Bricks\Element {
 			'label'       => esc_html__( 'Box Size', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '120px',
+			'placeholder' => '7.5em',
 			'css'         => [
 				[
 					'property' => 'width',
@@ -172,11 +177,48 @@ class BoxShadowsItem extends \Bricks\Element {
 			'label'       => esc_html__( 'Box Border Radius', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '8px',
+			'placeholder' => '0.5em',
 			'css'         => [
 				[
 					'property' => 'border-radius',
 					'selector' => '.atsg-shadows-item__box',
+				],
+			],
+		];
+
+		// Typography controls.
+		$this->controls['labelTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Label Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-shadows-item__label',
+				],
+			],
+		];
+
+		$this->controls['variableTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Variable Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-shadows-item__variable',
+				],
+			],
+		];
+
+		$this->controls['valueTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Value Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-shadows-item__value',
 				],
 			],
 		];
@@ -258,42 +300,42 @@ class BoxShadowsItem extends \Bricks\Element {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: var(--at-space--s, 1rem);
+				gap: 1em;
 			}
 
 			.atsg-shadows-item__box {
-				width: 120px;
-				height: 120px;
+				width: 7.5em;
+				height: 7.5em;
 				background-color: var(--at-white, #ffffff);
-				border-radius: var(--at-radius--s, 8px);
+				border-radius: 0.5em;
 			}
 
 			.atsg-shadows-item__info {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: var(--at-space--3xs, 0.25rem);
+				gap: 0.25em;
 				text-align: center;
 			}
 
 			.atsg-shadows-item__label {
 				font-weight: 600;
-				font-size: var(--at-text--s, 0.875rem);
+				font-size: 0.875em;
 				color: var(--at-neutral-d-3, #374151);
 			}
 
 			.atsg-shadows-item__variable {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 				color: var(--at-neutral-d-2, #6b7280);
 				background: var(--at-neutral-t-6, #f3f4f6);
-				padding: var(--at-space--3xs, 0.125rem) var(--at-space--2xs, 0.375rem);
-				border-radius: var(--at-radius--xs, 4px);
+				padding: 0.125em 0.375em;
+				border-radius: 0.25em;
 			}
 
 			.atsg-shadows-item__value {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 				color: var(--at-neutral-d-2, #6b7280);
-				max-width: 200px;
+				max-width: 12.5em;
 				word-break: break-all;
 				text-align: center;
 			}

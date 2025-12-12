@@ -113,13 +113,28 @@ class Spacing extends \Bricks\Element {
 			'rerender' => true,
 		];
 
+		$this->controls['baseFontSize'] = [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Base Font Size', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'default'     => 'var(--at-text--s)',
+			'css'         => [
+				[
+					'property' => 'font-size',
+					'selector' => '',
+				],
+			],
+			'description' => esc_html__( 'Base font size for the element. Sub-components use em units relative to this.', 'advanced-themer-style-guide' ),
+		];
+
 		$this->controls['gap'] = [
-			'group'   => 'layout',
-			'label'   => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '1rem',
-			'css'     => [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => '1em',
+			'css'         => [
 				[
 					'property' => 'gap',
 					'selector' => '',
@@ -198,19 +213,19 @@ class Spacing extends \Bricks\Element {
 			],
 		];
 
-		$this->controls['barHeight'] = [
+		$this->controls['barThickness'] = [
 			'group'       => 'style',
-			'label'       => esc_html__( 'Bar Height', 'advanced-themer-style-guide' ),
+			'label'       => esc_html__( 'Bar Thickness', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '24px',
+			'placeholder' => '1.5em',
 			'css'         => [
 				[
-					'property' => 'height',
-					'selector' => '&:not(.atsg-spacing--vertical) .atsg-spacing-item__bar',
+					'property' => '--atsg-bar-thickness',
+					'selector' => '',
 				],
 			],
-			'description' => esc_html__( 'Only applies to horizontal layout.', 'advanced-themer-style-guide' ),
+			'description' => esc_html__( 'Thickness of the spacing bars (height in horizontal, width in vertical layout).', 'advanced-themer-style-guide' ),
 		];
 
 		$this->controls['labelTypography'] = [
@@ -225,13 +240,37 @@ class Spacing extends \Bricks\Element {
 			],
 		];
 
+		$this->controls['variableTypography'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Variable Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-spacing-item__variable',
+				],
+			],
+		];
+
+		$this->controls['valueTypography'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Value Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-spacing-item__value',
+				],
+			],
+		];
+
 		$this->controls['infoMinWidth'] = [
-			'group'   => 'style',
-			'label'   => esc_html__( 'Info Min Width', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '120px',
-			'css'     => [
+			'group'       => 'style',
+			'label'       => esc_html__( 'Info Min Width', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => 'var(--at-space--3xl)',
+			'css'         => [
 				[
 					'property' => 'min-width',
 					'selector' => '.atsg-spacing-item__info',
@@ -368,18 +407,24 @@ class Spacing extends \Bricks\Element {
 	private function get_element_css(): string {
 		return '
 			.atsg-spacing {
+				--atsg-bar-thickness: 1.5em;
 				display: flex;
 				flex-direction: column;
-				gap: var(--at-space--s, 1rem);
+				gap: 1em;
 			}
 
 			.atsg-spacing__placeholder {
-				padding: var(--at-space--l, 2rem);
+				padding: 2em;
 				background: var(--at-neutral-t-6, #f3f4f6);
-				border: var(--at-border-width, 2px) dashed var(--at-border-color, #d1d5db);
-				border-radius: var(--at-radius--s, 8px);
+				border: 2px dashed var(--at-border-color, #d1d5db);
+				border-radius: 0.5em;
 				text-align: center;
 				color: var(--at-neutral-d-2, #6b7280);
+			}
+
+			/* Horizontal layout: bar thickness = height, width = spacing value */
+			.atsg-spacing--horizontal .atsg-spacing-item__bar {
+				height: var(--atsg-bar-thickness) !important;
 			}
 
 			/* Vertical layout */
@@ -387,7 +432,7 @@ class Spacing extends \Bricks\Element {
 				flex-direction: row;
 				flex-wrap: wrap;
 				align-items: flex-end;
-				gap: var(--at-space--m, 1.5rem);
+				gap: 1.5em;
 			}
 
 			.atsg-spacing--vertical .atsg-spacing-item {
@@ -404,13 +449,14 @@ class Spacing extends \Bricks\Element {
 			.atsg-spacing--vertical .atsg-spacing-item__bar-container {
 				flex-direction: column;
 				justify-content: flex-end;
-				height: 200px;
+				height: 12em;
 				order: 1;
 			}
 
+			/* Vertical layout: bar thickness = width, height = spacing value */
 			.atsg-spacing--vertical .atsg-spacing-item__bar {
-				width: 24px !important;
-				/* height comes from inline style */
+				width: var(--atsg-bar-thickness) !important;
+				height: auto;
 			}
 
 			/* Style: Minimal */
@@ -424,12 +470,12 @@ class Spacing extends \Bricks\Element {
 
 			/* Style: Bold */
 			.atsg-spacing--bold .atsg-spacing-item__label {
-				font-size: var(--at-text--s, 0.875rem);
+				font-size: 0.875em;
 				font-weight: 700;
 			}
 
 			.atsg-spacing--bold .atsg-spacing-item__bar {
-				height: 32px;
+				--atsg-bar-thickness: 2em;
 			}
 
 			/* Style: Colourful */
@@ -448,28 +494,28 @@ class Spacing extends \Bricks\Element {
 
 			/* Style: Compact */
 			.atsg-spacing--compact {
-				gap: var(--at-space--3xs, 0.25rem);
+				gap: 0.25em;
 			}
 
 			.atsg-spacing--compact .atsg-spacing-item {
-				gap: var(--at-space--2xs, 0.5rem);
+				gap: 0.5em;
 			}
 
 			.atsg-spacing--compact .atsg-spacing-item__info {
-				min-width: 80px;
-				gap: var(--at-space--3xs, 0.125rem);
+				min-width: 5em;
+				gap: 0.125em;
 			}
 
 			.atsg-spacing--compact .atsg-spacing-item__label {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 			}
 
 			.atsg-spacing--compact .atsg-spacing-item__variable {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 			}
 
 			.atsg-spacing--compact .atsg-spacing-item__bar {
-				height: 16px;
+				--atsg-bar-thickness: 1em;
 			}
 
 			/* Parent override styles - hide elements based on parent data attributes */

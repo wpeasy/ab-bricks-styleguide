@@ -82,6 +82,11 @@ class ButtonsItem extends \Bricks\Element {
 			'title' => esc_html__( 'Display', 'advanced-themer-style-guide' ),
 			'tab'   => 'content',
 		];
+
+		$this->control_groups['typography'] = [
+			'title' => esc_html__( 'Typography', 'advanced-themer-style-guide' ),
+			'tab'   => 'content',
+		];
 	}
 
 	/**
@@ -183,6 +188,31 @@ class ButtonsItem extends \Bricks\Element {
 			'label'    => esc_html__( 'Hide CSS Classes', 'advanced-themer-style-guide' ),
 			'type'     => 'checkbox',
 			'rerender' => true,
+		];
+
+		// Typography controls.
+		$this->controls['descriptionTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Description Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-buttons-item__description',
+				],
+			],
+		];
+
+		$this->controls['classesTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Classes Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-buttons-item__classes',
+				],
+			],
 		];
 	}
 
@@ -294,7 +324,7 @@ class ButtonsItem extends \Bricks\Element {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: var(--at-space--xs, 0.75rem);
+				gap: 0.75em;
 			}
 
 			.atsg-buttons-item__sample {
@@ -307,22 +337,22 @@ class ButtonsItem extends \Bricks\Element {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				gap: var(--at-space--3xs, 0.25rem);
+				gap: 0.25em;
 				text-align: center;
 			}
 
 			.atsg-buttons-item__description {
 				font-weight: 600;
-				font-size: var(--at-text--xs, 0.875rem);
+				font-size: 0.875em;
 				color: var(--at-neutral-d-3, #374151);
 			}
 
 			.atsg-buttons-item__classes {
-				font-size: var(--at-text--2xs, 0.75rem);
+				font-size: 0.75em;
 				color: var(--at-neutral-d-2, #6b7280);
 				background: var(--at-neutral-t-6, #f3f4f6);
-				padding: var(--at-space--3xs, 0.125rem) var(--at-space--2xs, 0.375rem);
-				border-radius: var(--at-radius--xs, 4px);
+				padding: 0.125em 0.375em;
+				border-radius: 0.25em;
 				word-spacing: 0.25em;
 			}
 

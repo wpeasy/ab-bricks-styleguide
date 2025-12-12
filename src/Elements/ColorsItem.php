@@ -220,7 +220,7 @@ class ColorsItem extends \Bricks\Element {
 			'label'       => esc_html__( 'Grid Gap', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '4px',
+			'placeholder' => '0.25em',
 			'css'         => [
 				[
 					'property' => 'gap',
@@ -229,6 +229,18 @@ class ColorsItem extends \Bricks\Element {
 				[
 					'property' => 'gap',
 					'selector' => '.atsg-colors-item__column',
+				],
+			],
+		];
+
+		$this->controls['labelTypography'] = [
+			'group' => 'swatchStyle',
+			'label' => esc_html__( 'Label Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-colors-item__label',
 				],
 			],
 		];

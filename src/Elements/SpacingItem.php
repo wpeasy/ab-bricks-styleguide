@@ -82,6 +82,11 @@ class SpacingItem extends \Bricks\Element {
 			'title' => esc_html__( 'Bar Style', 'advanced-themer-style-guide' ),
 			'tab'   => 'content',
 		];
+
+		$this->control_groups['typography'] = [
+			'title' => esc_html__( 'Typography', 'advanced-themer-style-guide' ),
+			'tab'   => 'content',
+		];
 	}
 
 	/**
@@ -149,16 +154,53 @@ class SpacingItem extends \Bricks\Element {
 			],
 		];
 
-		$this->controls['barHeight'] = [
-			'group'   => 'barStyle',
-			'label'   => esc_html__( 'Bar Height', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '24px',
-			'css'     => [
+		$this->controls['barThickness'] = [
+			'group'       => 'barStyle',
+			'label'       => esc_html__( 'Bar Thickness', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => '1.5em',
+			'css'         => [
 				[
-					'property' => 'height',
-					'selector' => '.atsg-spacing-item__bar',
+					'property' => '--atsg-bar-thickness',
+					'selector' => '',
+				],
+			],
+		];
+
+		// Typography controls.
+		$this->controls['labelTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Label Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-spacing-item__label',
+				],
+			],
+		];
+
+		$this->controls['variableTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Variable Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-spacing-item__variable',
+				],
+			],
+		];
+
+		$this->controls['valueTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Value Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-spacing-item__value',
 				],
 			],
 		];
@@ -241,55 +283,50 @@ class SpacingItem extends \Bricks\Element {
 			.atsg-spacing-item {
 				display: flex;
 				align-items: center;
-				gap: var(--at-space--s, 1rem);
+				gap: 1em;
 			}
 
 			.atsg-spacing-item__info {
 				display: flex;
 				flex-direction: column;
-				gap: var(--at-space--3xs, 0.25rem);
-				min-width: 120px;
+				gap: 0.25em;
+				min-width: 7.5em;
 			}
 
 			.atsg-spacing-item__label {
 				font-weight: 600;
-				font-size: var(--at-text--s, 0.875rem);
+				font-size: 0.875em;
 				color: var(--at-neutral-d-3, #374151);
 			}
 
 			.atsg-spacing-item__variable {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 				color: var(--at-neutral-d-2, #6b7280);
 				background: var(--at-neutral-t-6, #f3f4f6);
-				padding: var(--at-space--3xs, 0.125rem) var(--at-space--2xs, 0.375rem);
-				border-radius: var(--at-radius--xs, 4px);
+				padding: 0.125em 0.375em;
+				border-radius: 0.25em;
 				width: fit-content;
 			}
 
 			.atsg-spacing-item__bar-container {
 				display: flex;
 				align-items: center;
-				gap: var(--at-space--xs, 0.75rem);
+				gap: 0.75em;
 				flex: 1;
 			}
 
 			.atsg-spacing-item__bar {
 				background-color: var(--at-primary, #3b82f6);
-				border-radius: var(--at-radius--xs, 4px);
-				min-width: 4px;
-				min-height: 4px;
+				border-radius: 0.25em;
+				min-width: 0.25em;
+				min-height: 0.25em;
 				transition: width 0.2s ease, height 0.2s ease;
 			}
 
-			/* Horizontal mode: fixed height, variable width */
-			.atsg-spacing:not(.atsg-spacing--vertical) .atsg-spacing-item__bar {
-				height: 24px !important;
-			}
-
 			.atsg-spacing-item__value {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 				color: var(--at-neutral-d-2, #6b7280);
-				min-width: 50px;
+				min-width: 3.125em;
 			}
 
 			.atsg-spacing-item__value-label {
@@ -307,7 +344,7 @@ class SpacingItem extends \Bricks\Element {
 				.atsg-spacing-item__info {
 					min-width: auto;
 					flex-direction: row;
-					gap: var(--at-space--xs, 0.5rem);
+					gap: 0.5em;
 					align-items: center;
 				}
 

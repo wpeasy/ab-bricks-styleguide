@@ -86,6 +86,11 @@ class Buttons extends \Bricks\Element {
 			'title' => esc_html__( 'Display Override', 'advanced-themer-style-guide' ),
 			'tab'   => 'content',
 		];
+
+		$this->control_groups['style'] = [
+			'title' => esc_html__( 'Item Styling', 'advanced-themer-style-guide' ),
+			'tab'   => 'content',
+		];
 	}
 
 	/**
@@ -95,6 +100,21 @@ class Buttons extends \Bricks\Element {
 	 */
 	public function set_controls(): void {
 		// Layout controls.
+		$this->controls['baseFontSize'] = [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Base Font Size', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'default'     => 'var(--at-text--s)',
+			'css'         => [
+				[
+					'property' => 'font-size',
+					'selector' => '',
+				],
+			],
+			'description' => esc_html__( 'Base font size for the element. Sub-components use em units relative to this.', 'advanced-themer-style-guide' ),
+		];
+
 		$this->controls['layout'] = [
 			'group'    => 'layout',
 			'label'    => esc_html__( 'Layout', 'advanced-themer-style-guide' ),
@@ -126,12 +146,12 @@ class Buttons extends \Bricks\Element {
 		];
 
 		$this->controls['gap'] = [
-			'group'   => 'layout',
-			'label'   => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '1.5rem',
-			'css'     => [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => '1.5em',
+			'css'         => [
 				[
 					'property' => 'gap',
 					'selector' => '.atsg-buttons__grid',
@@ -144,12 +164,12 @@ class Buttons extends \Bricks\Element {
 			'label'       => esc_html__( 'Row Gap', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '2rem',
+			'placeholder' => '2em',
 			'required'    => [ 'layout', '=', 'rows' ],
 			'css'         => [
 				[
 					'property' => 'gap',
-					'selector' => '&.atsg-buttons--rows .atsg-buttons__grid',
+					'selector' => '.atsg-buttons--rows .atsg-buttons__grid',
 				],
 			],
 		];
@@ -192,6 +212,31 @@ class Buttons extends \Bricks\Element {
 			'type'     => 'checkbox',
 			'rerender' => true,
 			'required' => [ 'overrideChildDisplay', '!=', '' ],
+		];
+
+		// Typography controls for item styling.
+		$this->controls['descriptionTypography'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Description Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-buttons-item__description',
+				],
+			],
+		];
+
+		$this->controls['classesTypography'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Classes Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-buttons-item__classes',
+				],
+			],
 		];
 	}
 
@@ -341,13 +386,13 @@ class Buttons extends \Bricks\Element {
 			.atsg-buttons {
 				display: flex;
 				flex-direction: column;
-				gap: var(--at-space--s, 0.75rem);
+				gap: 0.75em;
 			}
 
 			.atsg-buttons__grid {
 				display: flex;
 				flex-wrap: wrap;
-				gap: var(--at-space--m, 1.5rem);
+				gap: 1.5em;
 			}
 
 			/* Grid layout */
@@ -366,19 +411,19 @@ class Buttons extends \Bricks\Element {
 			.atsg-buttons--rows .atsg-buttons__grid {
 				display: flex;
 				flex-direction: column;
-				gap: var(--at-space--l, 2rem);
+				gap: 2em;
 			}
 
 			.atsg-buttons--rows .atsg-buttons-item {
 				flex-direction: row;
 				justify-content: flex-start;
-				gap: var(--at-space--m, 1.5rem);
+				gap: 1.5em;
 			}
 
 			.atsg-buttons--rows .atsg-buttons-item__info {
 				align-items: flex-start;
 				text-align: left;
-				min-width: 150px;
+				min-width: 9.375em;
 			}
 
 			/* Style: Minimal */
@@ -388,7 +433,7 @@ class Buttons extends \Bricks\Element {
 
 			/* Style: Compact */
 			.atsg-buttons--compact {
-				gap: var(--at-space--s, 1rem);
+				gap: 1em;
 			}
 
 			.atsg-buttons--compact.atsg-buttons--grid .atsg-buttons__grid {
@@ -397,15 +442,15 @@ class Buttons extends \Bricks\Element {
 			}
 
 			.atsg-buttons--compact .atsg-buttons-item {
-				gap: var(--at-space--2xs, 0.5rem);
+				gap: 0.5em;
 			}
 
 			.atsg-buttons--compact .atsg-buttons-item__description {
-				font-size: var(--at-text--2xs, 0.75rem);
+				font-size: 0.75em;
 			}
 
 			.atsg-buttons--compact .atsg-buttons-item__classes {
-				font-size: var(--at-text--3xs, 0.625rem);
+				font-size: 0.625em;
 			}
 
 			/* Parent override styles - hide elements based on parent data attributes */
@@ -420,13 +465,13 @@ class Buttons extends \Bricks\Element {
 			/* Toolbar with toggles */
 			.atsg-buttons__toolbar {
 				display: flex;
-				gap: var(--at-space--m, 1rem);
+				gap: 1em;
 			}
 
 			.atsg-buttons__toggle {
 				display: flex;
 				align-items: center;
-				gap: 6px;
+				gap: 0.375em;
 				cursor: pointer;
 				user-select: none;
 			}
@@ -440,20 +485,20 @@ class Buttons extends \Bricks\Element {
 
 			.atsg-buttons__toggle-switch {
 				position: relative;
-				width: 24px;
-				height: 14px;
+				width: 1.5em;
+				height: 0.875em;
 				background: var(--at-neutral-t-4, #d1d5db);
-				border-radius: 7px;
+				border-radius: 0.4375em;
 				transition: background 0.2s ease;
 			}
 
 			.atsg-buttons__toggle-switch::after {
 				content: "";
 				position: absolute;
-				top: 2px;
-				left: 2px;
-				width: 10px;
-				height: 10px;
+				top: 0.125em;
+				left: 0.125em;
+				width: 0.625em;
+				height: 0.625em;
 				background: var(--at-white, #ffffff);
 				border-radius: 50%;
 				transition: transform 0.2s ease;
@@ -464,11 +509,11 @@ class Buttons extends \Bricks\Element {
 			}
 
 			.atsg-buttons__toggle-input:checked + .atsg-buttons__toggle-switch::after {
-				transform: translateX(10px);
+				transform: translateX(0.625em);
 			}
 
 			.atsg-buttons__toggle-label {
-				font-size: 11px;
+				font-size: 0.6875em;
 				color: var(--at-neutral-d-2, #6b7280);
 			}
 		';

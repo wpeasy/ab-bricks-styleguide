@@ -100,13 +100,28 @@ class BoxShadows extends \Bricks\Element {
 	 */
 	public function set_controls(): void {
 		// Layout controls.
+		$this->controls['baseFontSize'] = [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Base Font Size', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'default'     => 'var(--at-text--s)',
+			'css'         => [
+				[
+					'property' => 'font-size',
+					'selector' => '',
+				],
+			],
+			'description' => esc_html__( 'Base font size for the element. Sub-components use em units relative to this.', 'advanced-themer-style-guide' ),
+		];
+
 		$this->controls['gap'] = [
-			'group'   => 'layout',
-			'label'   => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '2rem',
-			'css'     => [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => '2em',
+			'css'         => [
 				[
 					'property' => 'gap',
 					'selector' => '',
@@ -191,7 +206,7 @@ class BoxShadows extends \Bricks\Element {
 			'label'       => esc_html__( 'Box Size', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '120px',
+			'placeholder' => '7.5em',
 			'css'         => [
 				[
 					'property' => 'width',
@@ -221,7 +236,7 @@ class BoxShadows extends \Bricks\Element {
 			'label'       => esc_html__( 'Box Border Radius', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '8px',
+			'placeholder' => '0.5em',
 			'css'         => [
 				[
 					'property' => 'border-radius',
@@ -238,6 +253,30 @@ class BoxShadows extends \Bricks\Element {
 				[
 					'property' => 'font',
 					'selector' => '.atsg-shadows-item__label',
+				],
+			],
+		];
+
+		$this->controls['variableTypography'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Variable Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-shadows-item__variable',
+				],
+			],
+		];
+
+		$this->controls['valueTypography'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Value Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-shadows-item__value',
 				],
 			],
 		];
@@ -368,14 +407,14 @@ class BoxShadows extends \Bricks\Element {
 			.atsg-shadows {
 				display: flex;
 				flex-wrap: wrap;
-				gap: var(--at-space--l, 2rem);
+				gap: 2em;
 			}
 
 			.atsg-shadows__placeholder {
-				padding: var(--at-space--l, 2rem);
+				padding: 2em;
 				background: var(--at-neutral-t-6, #f3f4f6);
-				border: var(--at-border-width, 2px) dashed var(--at-border-color, #d1d5db);
-				border-radius: var(--at-radius--s, 8px);
+				border: 2px dashed var(--at-border-color, #d1d5db);
+				border-radius: 0.5em;
 				text-align: center;
 				color: var(--at-neutral-d-2, #6b7280);
 				width: 100%;
@@ -388,13 +427,13 @@ class BoxShadows extends \Bricks\Element {
 
 			/* Style: Bold */
 			.atsg-shadows--bold .atsg-shadows-item__label {
-				font-size: var(--at-text--s, 0.875rem);
+				font-size: 0.875em;
 				font-weight: 700;
 			}
 
 			.atsg-shadows--bold .atsg-shadows-item__box {
-				width: 140px;
-				height: 140px;
+				width: 8.75em;
+				height: 8.75em;
 			}
 
 			/* Style: Colourful */
@@ -413,24 +452,24 @@ class BoxShadows extends \Bricks\Element {
 
 			/* Style: Compact */
 			.atsg-shadows--compact {
-				gap: var(--at-space--s, 1rem);
+				gap: 1em;
 			}
 
 			.atsg-shadows--compact .atsg-shadows-item {
-				gap: var(--at-space--2xs, 0.375rem);
+				gap: 0.375em;
 			}
 
 			.atsg-shadows--compact .atsg-shadows-item__box {
-				width: 80px;
-				height: 80px;
+				width: 5em;
+				height: 5em;
 			}
 
 			.atsg-shadows--compact .atsg-shadows-item__label {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 			}
 
 			.atsg-shadows--compact .atsg-shadows-item__variable {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 			}
 
 			/* Parent override styles - hide elements based on parent data attributes */

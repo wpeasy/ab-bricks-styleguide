@@ -148,12 +148,12 @@ class ColorSwatch extends \Bricks\Element {
 		];
 
 		$this->controls['swatchSize'] = [
-			'group'   => 'display',
-			'label'   => esc_html__( 'Swatch Size', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '60px',
-			'css'     => [
+			'group'       => 'display',
+			'label'       => esc_html__( 'Swatch Size', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => 'var(--at-space--xl)',
+			'css'         => [
 				[
 					'property' => 'width',
 					'selector' => '.atsg-swatch__item',
@@ -177,12 +177,12 @@ class ColorSwatch extends \Bricks\Element {
 		];
 
 		$this->controls['swatchBorderRadius'] = [
-			'group'   => 'display',
-			'label'   => esc_html__( 'Border Radius', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '8px',
-			'css'     => [
+			'group'       => 'display',
+			'label'       => esc_html__( 'Border Radius', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => 'var(--at-radius--s)',
+			'css'         => [
 				[
 					'property' => 'border-radius',
 					'selector' => '.atsg-swatch__item',
@@ -191,12 +191,12 @@ class ColorSwatch extends \Bricks\Element {
 		];
 
 		$this->controls['gap'] = [
-			'group'   => 'display',
-			'label'   => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '8px',
-			'css'     => [
+			'group'       => 'display',
+			'label'       => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => 'var(--at-space--xs)',
+			'css'         => [
 				[
 					'property' => 'gap',
 					'selector' => '.atsg-swatch__row',

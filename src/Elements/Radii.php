@@ -100,13 +100,28 @@ class Radii extends \Bricks\Element {
 	 */
 	public function set_controls(): void {
 		// Layout controls.
+		$this->controls['baseFontSize'] = [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Base Font Size', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'default'     => 'var(--at-text--s)',
+			'css'         => [
+				[
+					'property' => 'font-size',
+					'selector' => '',
+				],
+			],
+			'description' => esc_html__( 'Base font size for the element. Sub-components use em units relative to this.', 'advanced-themer-style-guide' ),
+		];
+
 		$this->controls['gap'] = [
-			'group'   => 'layout',
-			'label'   => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
-			'type'    => 'number',
-			'units'   => true,
-			'default' => '1.5rem',
-			'css'     => [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'placeholder' => '1.5em',
+			'css'         => [
 				[
 					'property' => 'gap',
 					'selector' => '',
@@ -178,7 +193,7 @@ class Radii extends \Bricks\Element {
 			'label'       => esc_html__( 'Box Size', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '100px',
+			'placeholder' => '6.25em',
 			'css'         => [
 				[
 					'property' => 'width',
@@ -223,6 +238,30 @@ class Radii extends \Bricks\Element {
 				[
 					'property' => 'font',
 					'selector' => '.atsg-radii-item__label',
+				],
+			],
+		];
+
+		$this->controls['variableTypography'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Variable Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-radii-item__variable',
+				],
+			],
+		];
+
+		$this->controls['valueTypography'] = [
+			'group' => 'style',
+			'label' => esc_html__( 'Value Typography', 'advanced-themer-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-radii-item__value',
 				],
 			],
 		];
@@ -354,14 +393,14 @@ class Radii extends \Bricks\Element {
 			.atsg-radii {
 				display: flex;
 				flex-wrap: wrap;
-				gap: var(--at-space--m, 1.5rem);
+				gap: 1.5em;
 			}
 
 			.atsg-radii__placeholder {
-				padding: var(--at-space--l, 2rem);
+				padding: 2em;
 				background: var(--at-neutral-t-6, #f3f4f6);
-				border: var(--at-border-width, 2px) dashed var(--at-border-color, #d1d5db);
-				border-radius: var(--at-radius--s, 8px);
+				border: 2px dashed var(--at-border-color, #d1d5db);
+				border-radius: 0.5em;
 				text-align: center;
 				color: var(--at-neutral-d-2, #6b7280);
 				width: 100%;
@@ -379,7 +418,7 @@ class Radii extends \Bricks\Element {
 
 			/* Style: Bold */
 			.atsg-radii--bold .atsg-radii-item__label {
-				font-size: var(--at-text--s, 0.875rem);
+				font-size: 0.875em;
 				font-weight: 700;
 			}
 
@@ -404,24 +443,24 @@ class Radii extends \Bricks\Element {
 
 			/* Style: Compact */
 			.atsg-radii--compact {
-				gap: var(--at-space--s, 0.75rem);
+				gap: 0.75em;
 			}
 
 			.atsg-radii--compact .atsg-radii-item {
-				gap: var(--at-space--2xs, 0.375rem);
+				gap: 0.375em;
 			}
 
 			.atsg-radii--compact .atsg-radii-item__box {
-				width: 60px;
-				height: 60px;
+				width: 3.75em;
+				height: 3.75em;
 			}
 
 			.atsg-radii--compact .atsg-radii-item__label {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 			}
 
 			.atsg-radii--compact .atsg-radii-item__variable {
-				font-size: var(--at-text--xs, 0.75rem);
+				font-size: 0.75em;
 			}
 
 			/* Parent override styles - hide elements based on parent data attributes */

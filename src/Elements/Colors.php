@@ -105,6 +105,22 @@ class Colors extends \Bricks\Element {
 	 * @return void
 	 */
 	public function set_controls(): void {
+		// Base font size control.
+		$this->controls['baseFontSize'] = [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Base Font Size', 'advanced-themer-style-guide' ),
+			'type'        => 'number',
+			'units'       => true,
+			'default'     => 'var(--at-text--s)',
+			'css'         => [
+				[
+					'property' => 'font-size',
+					'selector' => '',
+				],
+			],
+			'description' => esc_html__( 'Base font size for the element. Sub-components use em units relative to this.', 'advanced-themer-style-guide' ),
+		];
+
 		// Layout mode control.
 		$this->controls['layoutMode'] = [
 			'group'       => 'layout',
@@ -166,7 +182,7 @@ class Colors extends \Bricks\Element {
 			'label'       => esc_html__( 'Gap', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => 'var(--at-grid-gap)',
+			'placeholder' => '2em',
 			'css'         => [
 				[
 					'property' => 'gap',
@@ -316,7 +332,7 @@ class Colors extends \Bricks\Element {
 			'label'       => esc_html__( 'Swatch Gap', 'advanced-themer-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
-			'placeholder' => '4px',
+			'placeholder' => 'var(--at-space--3xs)',
 			'required'    => [ 'overrideChildStyle', '!=', '' ],
 			'css'         => [
 				[
@@ -345,6 +361,19 @@ class Colors extends \Bricks\Element {
 				[
 					'property' => 'border-radius',
 					'selector' => '.atsg-colors-item__base',
+				],
+			],
+		];
+
+		$this->controls['labelTypography'] = [
+			'group'    => 'styleOverride',
+			'label'    => esc_html__( 'Label Typography', 'advanced-themer-style-guide' ),
+			'type'     => 'typography',
+			'required' => [ 'overrideChildStyle', '!=', '' ],
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.atsg-colors-item__label',
 				],
 			],
 		];
@@ -503,7 +532,7 @@ class Colors extends \Bricks\Element {
 				display: flex;
 				flex-direction: row;
 				flex-wrap: wrap;
-				gap: var(--at-grid-gap, 2rem);
+				gap: 2em;
 			}
 
 			/* Parent display override styles */
@@ -537,13 +566,13 @@ class Colors extends \Bricks\Element {
 				width: 100%;
 				display: flex;
 				justify-content: flex-start;
-				margin-bottom: var(--at-space--2xs, 0.5rem);
+				margin-bottom: 0.5em;
 			}
 
 			.atsg-colors__toggle {
 				display: flex;
 				align-items: center;
-				gap: 6px;
+				gap: 0.375em;
 				cursor: pointer;
 				user-select: none;
 			}
@@ -557,20 +586,20 @@ class Colors extends \Bricks\Element {
 
 			.atsg-colors__toggle-switch {
 				position: relative;
-				width: 24px;
-				height: 14px;
+				width: 1.5em;
+				height: 0.875em;
 				background: var(--at-neutral-t-4, #d1d5db);
-				border-radius: 7px;
+				border-radius: 0.4375em;
 				transition: background 0.2s ease;
 			}
 
 			.atsg-colors__toggle-switch::after {
 				content: "";
 				position: absolute;
-				top: 2px;
-				left: 2px;
-				width: 10px;
-				height: 10px;
+				top: 0.125em;
+				left: 0.125em;
+				width: 0.625em;
+				height: 0.625em;
 				background: var(--at-white, #ffffff);
 				border-radius: 50%;
 				transition: transform 0.2s ease;
@@ -581,11 +610,11 @@ class Colors extends \Bricks\Element {
 			}
 
 			.atsg-colors__toggle-input:checked + .atsg-colors__toggle-switch::after {
-				transform: translateX(10px);
+				transform: translateX(0.625em);
 			}
 
 			.atsg-colors__toggle-label {
-				font-size: 11px;
+				font-size: 0.6875em;
 				color: var(--at-neutral-d-2, #6b7280);
 			}
 

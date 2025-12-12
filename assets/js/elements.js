@@ -9,6 +9,84 @@
 	'use strict';
 
 	/**
+	 * Get the original CSS value for a property, preserving CSS variable references
+	 * or original units (em, rem, %, etc.) instead of computed px values.
+	 *
+	 * @param {HTMLElement} element - The element to inspect.
+	 * @param {string} property - The CSS property name (e.g., 'line-height').
+	 * @returns {string|null} The original value with units, or null if not found.
+	 */
+	function getOriginalCSSValue(element, property) {
+		// First, check inline style
+		const inlineValue = element.style.getPropertyValue(property);
+		if (inlineValue && inlineValue !== '') {
+			return inlineValue;
+		}
+
+		// Walk through all stylesheets to find matching rules
+		try {
+			const sheets = document.styleSheets;
+			let matchedValue = null;
+			let matchedSpecificity = -1;
+
+			for (let i = 0; i < sheets.length; i++) {
+				let rules;
+				try {
+					rules = sheets[i].cssRules || sheets[i].rules;
+				} catch (e) {
+					// Cross-origin stylesheets may throw
+					continue;
+				}
+
+				if (!rules) continue;
+
+				for (let j = 0; j < rules.length; j++) {
+					const rule = rules[j];
+					if (rule.type !== CSSRule.STYLE_RULE) continue;
+
+					try {
+						if (element.matches(rule.selectorText)) {
+							const value = rule.style.getPropertyValue(property);
+							if (value && value !== '') {
+								// Simple specificity approximation (later rules win for same specificity)
+								matchedValue = value;
+							}
+						}
+					} catch (e) {
+						// Some selectors may be invalid
+						continue;
+					}
+				}
+			}
+
+			if (matchedValue) {
+				// If the value is a CSS variable, try to resolve it but keep showing the variable name
+				if (matchedValue.startsWith('var(')) {
+					// Extract variable name
+					const varMatch = matchedValue.match(/var\(([^,)]+)/);
+					if (varMatch) {
+						const varName = varMatch[1].trim();
+						// Get the actual variable value from computed styles
+						const resolvedValue = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+						// Return the resolved value but preserve its original units
+						if (resolvedValue) {
+							return resolvedValue;
+						}
+					}
+				}
+				return matchedValue;
+			}
+		} catch (e) {
+			// Fall through to return null
+		}
+
+		return null;
+	}
+
+	// Make function available globally for element scripts
+	window.getOriginalCSSValue = getOriginalCSSValue;
+
+	/**
 	 * Initialize all elements on the frontend.
 	 */
 	function initAllElements() {
@@ -60,6 +138,9 @@ function atTypographyItemInit() {
 			const lineHeightEl = item.querySelector('[data-computed="line-height"]');
 			const weightEl = item.querySelector('[data-computed="font-weight"]');
 			const spacingEl = item.querySelector('[data-computed="letter-spacing"]');
+			const colorEl = item.querySelector('[data-computed="color"]');
+			const transformEl = item.querySelector('[data-computed="text-transform"]');
+			const styleEl = item.querySelector('[data-computed="font-style"]');
 
 			if (familyEl) {
 				const family = computed.fontFamily.split(',')[0].replace(/["']/g, '').trim();
@@ -71,7 +152,16 @@ function atTypographyItemInit() {
 			}
 
 			if (lineHeightEl) {
-				lineHeightEl.textContent = computed.lineHeight;
+				// Try to get the original CSS value with its units instead of computed px
+				const originalLineHeight = getOriginalCSSValue(sample, 'line-height');
+				if (originalLineHeight) {
+					lineHeightEl.textContent = originalLineHeight;
+				} else if (computed.lineHeight === 'normal') {
+					lineHeightEl.textContent = 'Browser Default';
+				} else {
+					// No explicit line-height set, show "Browser Default"
+					lineHeightEl.textContent = 'Browser Default';
+				}
 			}
 
 			if (weightEl) {
@@ -81,6 +171,27 @@ function atTypographyItemInit() {
 			if (spacingEl) {
 				const spacing = computed.letterSpacing;
 				spacingEl.textContent = spacing === 'normal' ? '0' : spacing;
+			}
+
+			if (colorEl) {
+				// Convert RGB to hex for cleaner display
+				const rgbMatch = computed.color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+				if (rgbMatch) {
+					const r = parseInt(rgbMatch[1]).toString(16).padStart(2, '0');
+					const g = parseInt(rgbMatch[2]).toString(16).padStart(2, '0');
+					const b = parseInt(rgbMatch[3]).toString(16).padStart(2, '0');
+					colorEl.textContent = `#${r}${g}${b}`.toUpperCase();
+				} else {
+					colorEl.textContent = computed.color;
+				}
+			}
+
+			if (transformEl) {
+				transformEl.textContent = computed.textTransform;
+			}
+
+			if (styleEl) {
+				styleEl.textContent = computed.fontStyle;
 			}
 		};
 

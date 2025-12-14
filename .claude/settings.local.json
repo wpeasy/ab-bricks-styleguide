@@ -24,7 +24,8 @@
       "Bash(do php -l:*)",
       "Bash(done)",
       "Bash(for f in src/Elements/*.php src/Framework/*.php)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(dir /s /b \"C:\\Users\\Alan.Blair\\Local Sites\\bricks-playground\\app\\public\\wp-content\\plugins\\ab-bricks-styleguide\\assets\\admin\\src\\*.svelte\")"
     ]
   }
 }

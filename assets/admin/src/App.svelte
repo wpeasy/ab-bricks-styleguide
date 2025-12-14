@@ -15,6 +15,152 @@
   const isAT = $derived(activeFramework === 'at');
   const isACSS = $derived(activeFramework === 'acss');
 
+  // Copy feedback state
+  let copiedVar = $state<string | null>(null);
+  let copiedAll = $state<string | null>(null);
+
+  // Copy single variable to clipboard
+  async function copyVariable(varName: string) {
+    await navigator.clipboard.writeText(varName);
+    copiedVar = varName;
+    setTimeout(() => copiedVar = null, 1500);
+  }
+
+  // Copy all variables as a CSS block
+  async function copyAllVariables(elementName: string, variables: string[]) {
+    const cssBlock = `.your-custom-class {\n${variables.map(v => `  ${v}: ;`).join('\n')}\n}`;
+    await navigator.clipboard.writeText(cssBlock);
+    copiedAll = elementName;
+    setTimeout(() => copiedAll = null, 1500);
+  }
+
+  // CSS Override Variables for each element
+  const typographyItemVars = [
+    '--bsg-typography-item-label-color',
+    '--bsg-typography-item-label-font-size',
+    '--bsg-typography-item-label-font-weight',
+    '--bsg-typography-item-label-text-transform',
+    '--bsg-typography-item-label-letter-spacing',
+    '--bsg-typography-item-meta-font-size',
+    '--bsg-typography-item-meta-color',
+    '--bsg-typography-item-meta-bg',
+    '--bsg-typography-item-meta-text-color',
+    '--bsg-typography-item-meta-label-color'
+  ];
+
+  const typographyVars = [
+    '--bsg-typography-placeholder-padding',
+    '--bsg-typography-placeholder-bg',
+    '--bsg-typography-placeholder-border-color',
+    '--bsg-typography-placeholder-color'
+  ];
+
+  const spacingItemVars = [
+    '--bsg-spacing-item-label-font-weight',
+    '--bsg-spacing-item-label-font-size',
+    '--bsg-spacing-item-label-color',
+    '--bsg-spacing-item-variable-font-size',
+    '--bsg-spacing-item-variable-color',
+    '--bsg-spacing-item-variable-bg',
+    '--bsg-spacing-item-bar-color',
+    '--bsg-spacing-item-bar-radius',
+    '--bsg-spacing-item-value-font-size',
+    '--bsg-spacing-item-value-color',
+    '--bsg-spacing-item-value-label-color'
+  ];
+
+  const spacingVars = [
+    '--bsg-spacing-placeholder-padding',
+    '--bsg-spacing-placeholder-bg',
+    '--bsg-spacing-placeholder-border-color',
+    '--bsg-spacing-placeholder-color'
+  ];
+
+  const radiiItemVars = [
+    '--bsg-radii-item-box-size',
+    '--bsg-radii-item-box-bg',
+    '--bsg-radii-item-box-border-color',
+    '--bsg-radii-item-label-font-weight',
+    '--bsg-radii-item-label-font-size',
+    '--bsg-radii-item-label-color',
+    '--bsg-radii-item-variable-font-size',
+    '--bsg-radii-item-variable-color',
+    '--bsg-radii-item-variable-bg',
+    '--bsg-radii-item-value-font-size',
+    '--bsg-radii-item-value-color',
+    '--bsg-radii-item-value-label-color'
+  ];
+
+  const radiiVars = [
+    '--bsg-radii-placeholder-padding',
+    '--bsg-radii-placeholder-bg',
+    '--bsg-radii-placeholder-border-color',
+    '--bsg-radii-placeholder-color'
+  ];
+
+  const shadowsItemVars = [
+    '--bsg-shadows-item-box-size',
+    '--bsg-shadows-item-box-bg',
+    '--bsg-shadows-item-box-border-color',
+    '--bsg-shadows-item-box-radius',
+    '--bsg-shadows-item-label-font-weight',
+    '--bsg-shadows-item-label-font-size',
+    '--bsg-shadows-item-label-color',
+    '--bsg-shadows-item-variable-font-size',
+    '--bsg-shadows-item-variable-color',
+    '--bsg-shadows-item-variable-bg',
+    '--bsg-shadows-item-value-font-size',
+    '--bsg-shadows-item-value-color',
+    '--bsg-shadows-item-value-label-color'
+  ];
+
+  const shadowsVars = [
+    '--bsg-shadows-placeholder-padding',
+    '--bsg-shadows-placeholder-bg',
+    '--bsg-shadows-placeholder-border-color',
+    '--bsg-shadows-placeholder-color'
+  ];
+
+  const buttonsItemVars = [
+    '--bsg-buttons-item-description-font-weight',
+    '--bsg-buttons-item-description-font-size',
+    '--bsg-buttons-item-description-color',
+    '--bsg-buttons-item-classes-font-size',
+    '--bsg-buttons-item-classes-color',
+    '--bsg-buttons-item-classes-bg'
+  ];
+
+  const buttonsVars = [
+    '--bsg-buttons-toggle-switch-width',
+    '--bsg-buttons-toggle-switch-height',
+    '--bsg-buttons-toggle-switch-bg',
+    '--bsg-buttons-toggle-switch-active-bg',
+    '--bsg-buttons-toggle-label-font-size',
+    '--bsg-buttons-toggle-label-color'
+  ];
+
+  const colorsItemVars = [
+    '--bsg-colors-item-placeholder-padding',
+    '--bsg-colors-item-placeholder-bg',
+    '--bsg-colors-item-placeholder-border-color',
+    '--bsg-colors-item-placeholder-color',
+    '--bsg-colors-item-label-font-size',
+    '--bsg-colors-item-label-font-weight',
+    '--bsg-colors-item-label-color'
+  ];
+
+  const colorsVars = [
+    '--bsg-colors-toggle-switch-width',
+    '--bsg-colors-toggle-switch-height',
+    '--bsg-colors-toggle-switch-bg',
+    '--bsg-colors-toggle-switch-active-bg',
+    '--bsg-colors-toggle-label-font-size',
+    '--bsg-colors-toggle-label-color',
+    '--bsg-colors-glossary-bg',
+    '--bsg-colors-glossary-title-color',
+    '--bsg-colors-glossary-text-color'
+  ];
+
   // Tab content snippets must be defined inline
   const tabs = [
     { id: 'requirements', label: 'Requirements', content: requirementsContent },
@@ -27,6 +173,37 @@
     { id: 'buttons', label: 'Buttons', content: buttonsContent }
   ];
 </script>
+
+{#snippet cssVariablesSection(title: string, elementName: string, variables: string[])}
+  <div class="bsg-instructions__section">
+    <h4>{title}</h4>
+    <p>Override these CSS variables in your custom CSS to customize the element's appearance:</p>
+    <div class="bsg-var-list">
+      <div class="bsg-var-list__header">
+        <span class="bsg-var-list__title">CSS Variables</span>
+        <button
+          class="bsg-var-list__copy-all"
+          onclick={() => copyAllVariables(elementName, variables)}
+        >
+          {copiedAll === elementName ? '✓ Copied!' : 'Copy All'}
+        </button>
+      </div>
+      <ul class="bsg-var-list__items">
+        {#each variables as varName}
+          <li class="bsg-var-list__item">
+            <code class="bsg-var-list__code">{varName}</code>
+            <button
+              class="bsg-var-list__copy"
+              onclick={() => copyVariable(varName)}
+            >
+              {copiedVar === varName ? '✓' : 'Copy'}
+            </button>
+          </li>
+        {/each}
+      </ul>
+    </div>
+  </div>
+{/snippet}
 
 {#snippet requirementsContent()}
   <div class="bsg-instructions__content">
@@ -173,7 +350,7 @@
       </div>
 
       <div class="bsg-instructions__section">
-        <h4>CSS Variables</h4>
+        <h4>Framework CSS Variables</h4>
         <p>Elements use {isAT ? 'AT' : 'ACSS'} CSS variables with fallback values, ensuring graceful degradation:</p>
         {#if isAT}
           <ul>
@@ -188,6 +365,46 @@
             <li><code>var(--neutral-dark, #6b7280)</code> - Colors with fallback</li>
           </ul>
         {/if}
+      </div>
+
+      <div class="bsg-instructions__section">
+        <h4>CSS Override Variables</h4>
+        <p>Each element uses a <strong>local scope pattern</strong> with public override variables. This makes customization simple without fighting specificity:</p>
+        <div class="bsg-instructions__code-block">
+          <code>/* How it works internally */<br>
+.bsg-typography-item &#123;<br>
+&nbsp;&nbsp;/* Settings block defines local variables */<br>
+&nbsp;&nbsp;--_label-color: var(--bsg-typography-item-label-color, #6b7280);<br>
+&nbsp;&nbsp;--_label-font-size: var(--bsg-typography-item-label-font-size, 0.75em);<br>
+&#125;<br>
+.bsg-typography-item__label &#123;<br>
+&nbsp;&nbsp;/* Rules use local variables */<br>
+&nbsp;&nbsp;color: var(--_label-color);<br>
+&nbsp;&nbsp;font-size: var(--_label-font-size);<br>
+&#125;</code>
+        </div>
+        <p>To override, simply set the public variable (prefixed with <code>--bsg-</code>) in your CSS:</p>
+        <div class="bsg-instructions__code-block">
+          <code>/* Your custom styles */<br>
+.bsg-typography-item &#123;<br>
+&nbsp;&nbsp;--bsg-typography-item-label-color: #1e40af;<br>
+&nbsp;&nbsp;--bsg-typography-item-label-font-size: 0.875em;<br>
+&#125;<br><br>
+/* Or scope to a specific container */<br>
+.my-style-guide .bsg-typography-item &#123;<br>
+&nbsp;&nbsp;--bsg-typography-item-label-color: var(--at-primary);<br>
+&#125;</code>
+        </div>
+        <p>See each element's tab for the complete list of override variables with click-to-copy functionality.</p>
+      </div>
+
+      <div class="bsg-instructions__section">
+        <h4>Override Methods (Best to Least Preferred)</h4>
+        <ol>
+          <li><strong>CSS Variables</strong> - Set <code>--bsg-*</code> variables (cleanest, most maintainable)</li>
+          <li><strong>Direct CSS</strong> - Target BEM classes outside <code>@layer</code> (automatic specificity win)</li>
+          <li><strong>Bricks Controls</strong> - Use element style controls in the builder (inline styles)</li>
+        </ol>
       </div>
     </Card>
 
@@ -300,6 +517,12 @@
         </ul>
       </div>
     </Card>
+
+    <Card title="CSS Override Variables">
+      <p>Set these variables in your stylesheet to customize the element's appearance.</p>
+      {@render cssVariablesSection('Colors Item Variables', 'colorsItem', colorsItemVars)}
+      {@render cssVariablesSection('Colors Parent Variables', 'colors', colorsVars)}
+    </Card>
   </div>
 {/snippet}
 
@@ -337,6 +560,12 @@
         <p>Values update on window resize for responsive typography scales.</p>
       </div>
     </Card>
+
+    <Card title="CSS Override Variables">
+      <p>The plugin uses a local scope CSS variable pattern. Set these variables on a parent element or in your stylesheet to override the default styles.</p>
+      {@render cssVariablesSection('Typography Item Variables', 'typographyItem', typographyItemVars)}
+      {@render cssVariablesSection('Typography Parent Variables', 'typography', typographyVars)}
+    </Card>
   </div>
 {/snippet}
 
@@ -367,6 +596,12 @@
         <p>The element calculates the current pixel value from clamp() expressions and updates on window resize.</p>
       </div>
     </Card>
+
+    <Card title="CSS Override Variables">
+      <p>Set these variables in your stylesheet to customize the element's appearance.</p>
+      {@render cssVariablesSection('Spacing Item Variables', 'spacingItem', spacingItemVars)}
+      {@render cssVariablesSection('Spacing Parent Variables', 'spacing', spacingVars)}
+    </Card>
   </div>
 {/snippet}
 
@@ -393,6 +628,12 @@
         </ul>
       </div>
     </Card>
+
+    <Card title="CSS Override Variables">
+      <p>Set these variables in your stylesheet to customize the element's appearance.</p>
+      {@render cssVariablesSection('Radii Item Variables', 'radiiItem', radiiItemVars)}
+      {@render cssVariablesSection('Radii Parent Variables', 'radii', radiiVars)}
+    </Card>
   </div>
 {/snippet}
 
@@ -418,6 +659,12 @@
           <li><strong>Show Shadow Definition</strong> - Display the raw shadow value</li>
         </ul>
       </div>
+    </Card>
+
+    <Card title="CSS Override Variables">
+      <p>Set these variables in your stylesheet to customize the element's appearance.</p>
+      {@render cssVariablesSection('Box Shadow Item Variables', 'shadowsItem', shadowsItemVars)}
+      {@render cssVariablesSection('Box Shadows Parent Variables', 'shadows', shadowsVars)}
     </Card>
   </div>
 {/snippet}
@@ -463,6 +710,12 @@
           <li><strong>Rows</strong> - Buttons grouped by color in horizontal rows</li>
         </ul>
       </div>
+    </Card>
+
+    <Card title="CSS Override Variables">
+      <p>Set these variables in your stylesheet to customize the element's appearance.</p>
+      {@render cssVariablesSection('Button Item Variables', 'buttonsItem', buttonsItemVars)}
+      {@render cssVariablesSection('Buttons Parent Variables', 'buttons', buttonsVars)}
     </Card>
   </div>
 {/snippet}
@@ -524,7 +777,8 @@
     color: var(--wpea-surface--text-muted);
   }
 
-  .bsg-instructions__section ul {
+  .bsg-instructions__section ul,
+  .bsg-instructions__section ol {
     margin: 0;
     padding-left: var(--wpea-space--lg);
     color: var(--wpea-surface--text-muted);
@@ -532,6 +786,10 @@
 
   .bsg-instructions__section li {
     margin-bottom: var(--wpea-space--xs);
+  }
+
+  .bsg-instructions__section ol {
+    list-style-type: decimal;
   }
 
   .bsg-instructions__section code {
@@ -562,5 +820,94 @@
 
   :global(.wpea-alert) {
     margin-bottom: var(--wpea-space--md);
+  }
+
+  /* CSS Variable List Styles */
+  .bsg-var-list {
+    background: var(--wpea-surface--muted);
+    border-radius: var(--wpea-radius--sm);
+    overflow: hidden;
+    margin-top: var(--wpea-space--sm);
+  }
+
+  .bsg-var-list__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--wpea-space--sm) var(--wpea-space--md);
+    background: var(--wpea-surface--muted);
+    border-bottom: 1px solid var(--wpea-border--default);
+  }
+
+  .bsg-var-list__title {
+    font-weight: 600;
+    font-size: var(--wpea-text--sm);
+    color: var(--wpea-surface--text);
+  }
+
+  .bsg-var-list__copy-all {
+    background: var(--wpea-color--primary);
+    color: white;
+    border: none;
+    padding: 0.375em 0.75em;
+    border-radius: var(--wpea-radius--xs);
+    font-size: var(--wpea-text--xs);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .bsg-var-list__copy-all:hover {
+    background: var(--wpea-color--primary-hover, #1d4ed8);
+  }
+
+  .bsg-var-list__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .bsg-var-list__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--wpea-space--xs) var(--wpea-space--md);
+    border-bottom: 1px solid var(--wpea-border--default);
+    margin-bottom: 0;
+  }
+
+  .bsg-var-list__item:last-child {
+    border-bottom: none;
+  }
+
+  .bsg-var-list__item:hover {
+    background: var(--wpea-surface--hover, rgba(0, 0, 0, 0.03));
+  }
+
+  .bsg-var-list__code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: var(--wpea-text--xs);
+    color: var(--wpea-color--primary);
+    background: transparent;
+    padding: 0;
+  }
+
+  .bsg-var-list__copy {
+    background: transparent;
+    color: var(--wpea-surface--text-muted);
+    border: 1px solid var(--wpea-border--default);
+    padding: 0.25em 0.5em;
+    border-radius: var(--wpea-radius--xs);
+    font-size: var(--wpea-text--xs);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-width: 3.5em;
+  }
+
+  .bsg-var-list__copy:hover {
+    background: var(--wpea-surface--muted);
+    color: var(--wpea-surface--text);
+    border-color: var(--wpea-border--strong);
   }
 </style>

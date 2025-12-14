@@ -2,6 +2,18 @@
 
 All notable changes to Bricks Style Guide will be documented in this file.
 
+## [0.0.17-beta] - 2025-12-14
+
+### Added
+- **Admin Instructions**: CSS Override Variables documentation for all element tabs
+  - Lists all public CSS variables that can be overridden for each element
+  - Click-to-copy functionality for individual variables
+  - Copy All button generates a complete CSS block with all variables
+- **Admin Instructions**: General tab CSS Architecture section now explains the override system
+  - Documents the `--_` local scope pattern with code examples
+  - Shows how to set public `--bsg-*` variables for customization
+  - Lists override methods in order of preference (CSS Variables > Direct CSS > Bricks Controls)
+
 ## [0.0.16-beta] - 2025-12-14
 
 ### Changed

@@ -444,71 +444,69 @@ class Radii extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-radii {
+				--_placeholder-padding: var(--bsg-radii-placeholder-padding, 2em);
+				--_placeholder-bg: var(--bsg-radii-placeholder-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_placeholder-border-color: var(--bsg-radii-placeholder-border-color, var(--bsg-border-color, #d1d5db));
+				--_placeholder-color: var(--bsg-radii-placeholder-color, var(--bsg-neutral-medium, #6b7280));
+			}
+
 			.bsg-radii__placeholder {
-				padding: 2em;
-				background: var(--bsg-neutral-light, #f3f4f6);
-				border: 2px dashed var(--bsg-border-color, #d1d5db);
+				padding: var(--_placeholder-padding);
+				background: var(--_placeholder-bg);
+				border: 2px dashed var(--_placeholder-border-color);
 				border-radius: 0.5em;
 				text-align: center;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_placeholder-color);
 				width: 100%;
 			}
 
-			/* Style: Minimal */
+			/* Style: Minimal - override item settings */
+			.bsg-radii--minimal .bsg-radii-item {
+				--_box-bg: var(--bsg-border-color, #d1d5db);
+			}
+
 			.bsg-radii--minimal .bsg-radii-item__variable {
 				display: none;
 			}
 
 			.bsg-radii--minimal .bsg-radii-item__box {
 				border: none;
-				background-color: var(--bsg-border-color, #d1d5db);
 			}
 
-			/* Style: Bold */
-			.bsg-radii--bold .bsg-radii-item__label {
-				font-size: 0.875em;
-				font-weight: 700;
+			/* Style: Bold - override item settings */
+			.bsg-radii--bold .bsg-radii-item {
+				--_label-font-size: 0.875em;
+				--_label-font-weight: 700;
 			}
 
 			.bsg-radii--bold .bsg-radii-item__box {
 				border-width: 3px;
 			}
 
-			/* Style: Colourful */
+			/* Style: Colourful - override item settings */
+			.bsg-radii--colourful .bsg-radii-item {
+				--_label-color: var(--bsg-primary, #3b82f6);
+				--_variable-bg: var(--bsg-primary-light, #dbeafe);
+				--_variable-color: var(--bsg-primary-dark, #1d4ed8);
+				--_box-border-color: var(--bsg-primary, #3b82f6);
+			}
+
 			.bsg-radii--colourful .bsg-radii-item__box {
 				background: linear-gradient(135deg, var(--bsg-primary-light, #bfdbfe), var(--bsg-secondary-light, #c4b5fd));
-				border-color: var(--bsg-primary, #3b82f6);
 			}
 
-			.bsg-radii--colourful .bsg-radii-item__label {
-				color: var(--bsg-primary, #3b82f6);
-			}
-
-			.bsg-radii--colourful .bsg-radii-item__variable {
-				background: var(--bsg-primary-light, #dbeafe);
-				color: var(--bsg-primary-dark, #1d4ed8);
-			}
-
-			/* Style: Compact */
+			/* Style: Compact - override item settings */
 			.bsg-radii--compact {
 				gap: 0.75em;
 			}
 
 			.bsg-radii--compact .bsg-radii-item {
+				--_box-size: 3.75em;
+				--_label-font-size: 0.75em;
+				--_variable-font-size: 0.75em;
 				gap: 0.375em;
-			}
-
-			.bsg-radii--compact .bsg-radii-item__box {
-				width: 3.75em;
-				height: 3.75em;
-			}
-
-			.bsg-radii--compact .bsg-radii-item__label {
-				font-size: 0.75em;
-			}
-
-			.bsg-radii--compact .bsg-radii-item__variable {
-				font-size: 0.75em;
 			}
 			} /* end @layer bsg */
 		';

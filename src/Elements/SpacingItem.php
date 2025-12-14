@@ -345,40 +345,55 @@ class SpacingItem extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-spacing-item {
+				--_label-font-weight: var(--bsg-spacing-item-label-font-weight, 600);
+				--_label-font-size: var(--bsg-spacing-item-label-font-size, 0.875em);
+				--_label-color: var(--bsg-spacing-item-label-color, var(--bsg-neutral-darker, #374151));
+				--_variable-font-size: var(--bsg-spacing-item-variable-font-size, 0.75em);
+				--_variable-color: var(--bsg-spacing-item-variable-color, var(--bsg-neutral-medium, #6b7280));
+				--_variable-bg: var(--bsg-spacing-item-variable-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_bar-color: var(--bsg-spacing-item-bar-color, var(--bsg-primary, #3b82f6));
+				--_bar-radius: var(--bsg-spacing-item-bar-radius, 0.25em);
+				--_value-font-size: var(--bsg-spacing-item-value-font-size, 0.75em);
+				--_value-color: var(--bsg-spacing-item-value-color, var(--bsg-neutral-medium, #6b7280));
+				--_value-label-color: var(--bsg-spacing-item-value-label-color, var(--bsg-neutral-darker, #374151));
+			}
+
 			.bsg-spacing-item__label {
-				font-weight: 600;
-				font-size: 0.875em;
-				color: var(--bsg-neutral-darker, #374151);
+				font-weight: var(--_label-font-weight);
+				font-size: var(--_label-font-size);
+				color: var(--_label-color);
 			}
 
 			.bsg-spacing-item__variable {
-				font-size: 0.75em;
+				font-size: var(--_variable-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
-				background: var(--bsg-neutral-light, #f3f4f6);
+				color: var(--_variable-color);
+				background: var(--_variable-bg);
 				padding: 0.125em 0.375em;
 				border-radius: 0.25em;
 				width: fit-content;
 			}
 
 			.bsg-spacing-item__bar {
-				background-color: var(--bsg-primary, #3b82f6);
-				border-radius: 0.25em;
+				background-color: var(--_bar-color);
+				border-radius: var(--_bar-radius);
 				min-width: 0.25em;
 				min-height: 0.25em;
 				transition: width 0.2s ease, height 0.2s ease;
 			}
 
 			.bsg-spacing-item__value {
-				font-size: 0.75em;
+				font-size: var(--_value-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_value-color);
 				min-width: 3.125em;
 			}
 
 			.bsg-spacing-item__value-label {
 				font-weight: 600;
-				color: var(--bsg-neutral-darker, #374151);
+				color: var(--_value-label-color);
 			}
 			} /* end @layer bsg */
 		';

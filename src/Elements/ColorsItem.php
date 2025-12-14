@@ -954,19 +954,30 @@ class ColorsItem extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-colors-item {
+				--_placeholder-padding: var(--bsg-colors-item-placeholder-padding, var(--bsg-space-l, 2rem));
+				--_placeholder-bg: var(--bsg-colors-item-placeholder-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_placeholder-border-color: var(--bsg-colors-item-placeholder-border-color, var(--bsg-border-color, #d1d5db));
+				--_placeholder-color: var(--bsg-colors-item-placeholder-color, var(--bsg-neutral-medium, #6b7280));
+				--_label-font-size: var(--bsg-colors-item-label-font-size, var(--bsg-text-m, 1.125rem));
+				--_label-font-weight: var(--bsg-colors-item-label-font-weight, 600);
+				--_label-color: var(--bsg-colors-item-label-color, var(--bsg-neutral-darker, #1f2937));
+			}
+
 			.bsg-colors-item__placeholder {
-				padding: var(--bsg-space-l, 2rem);
-				background: var(--bsg-neutral-light, #f3f4f6);
-				border: var(--bsg-border-width, 0.125em) dashed var(--bsg-border-color, #d1d5db);
+				padding: var(--_placeholder-padding);
+				background: var(--_placeholder-bg);
+				border: var(--bsg-border-width, 0.125em) dashed var(--_placeholder-border-color);
 				border-radius: var(--bsg-radius-s, 0.5em);
 				text-align: center;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_placeholder-color);
 			}
 
 			.bsg-colors-item__label {
-				font-size: var(--bsg-text-m, 1.125rem);
-				font-weight: 600;
-				color: var(--bsg-neutral-darker, #1f2937);
+				font-size: var(--_label-font-size);
+				font-weight: var(--_label-font-weight);
+				color: var(--_label-color);
 			}
 
 			.bsg-colors-item__base {

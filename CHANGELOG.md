@@ -2,6 +2,15 @@
 
 All notable changes to Bricks Style Guide will be documented in this file.
 
+## [0.0.16-beta] - 2025-12-14
+
+### Changed
+- **CSS Architecture**: All elements now use `--_` local scope pattern for easier user overrides
+  - Settings block at top of each element's CSS defines public override variables
+  - Example: `--_label-color: var(--bsg-typography-item-label-color, #default);`
+  - Users can now override any style by setting the public variable (e.g., `--bsg-typography-item-label-color`)
+- **All Elements**: Parent style presets (Bold, Colourful, Compact, Minimal) now set local scope variables instead of direct styles
+
 ## [0.0.15-beta] - 2025-12-14
 
 ### Changed

@@ -577,13 +577,21 @@ class Typography extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-typography {
+				--_placeholder-padding: var(--bsg-typography-placeholder-padding, 2em);
+				--_placeholder-bg: var(--bsg-typography-placeholder-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_placeholder-border-color: var(--bsg-typography-placeholder-border-color, var(--bsg-border-color, #d1d5db));
+				--_placeholder-color: var(--bsg-typography-placeholder-color, var(--bsg-neutral-medium, #6b7280));
+			}
+
 			.bsg-typography__placeholder {
-				padding: 2em;
-				background: var(--bsg-neutral-light, #f3f4f6);
-				border: 2px dashed var(--bsg-border-color, #d1d5db);
+				padding: var(--_placeholder-padding);
+				background: var(--_placeholder-bg);
+				border: 2px dashed var(--_placeholder-border-color);
 				border-radius: 0.5em;
 				text-align: center;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_placeholder-color);
 			}
 
 			/* Style: Minimal */
@@ -600,28 +608,21 @@ class Typography extends \Bricks\Element {
 				opacity: 0.7;
 			}
 
-			/* Style: Bold */
-			.bsg-typography--bold .bsg-typography-item__label {
-				font-size: 0.875em;
-				font-weight: 700;
-				text-transform: none;
-				color: var(--bsg-neutral-darker, #1f2937);
-			}
-
+			/* Style: Bold - override item settings */
 			.bsg-typography--bold .bsg-typography-item {
+				--_label-font-size: 0.875em;
+				--_label-font-weight: 700;
+				--_label-text-transform: none;
+				--_label-color: var(--bsg-neutral-darker, #1f2937);
 				border-block-end-width: 2px;
 			}
 
-			/* Style: Colourful - uses CSS variables that can be overridden by controls */
-			.bsg-typography--colourful {
-				--bsg-typography-label-color: var(--bsg-primary, #3b82f6);
-				--bsg-typography-border-color: var(--bsg-primary-light, #93c5fd);
-				--bsg-typography-meta-bg: var(--bsg-primary-light, #dbeafe);
-				--bsg-typography-meta-color: var(--bsg-primary-dark, #1d4ed8);
-			}
-
+			/* Style: Colourful - override item settings */
 			.bsg-typography--colourful .bsg-typography-item {
-				border-block-end-color: var(--bsg-typography-border-color);
+				--_label-color: var(--bsg-primary, #3b82f6);
+				--_meta-bg: var(--bsg-primary-light, #dbeafe);
+				--_meta-text-color: var(--bsg-primary-dark, #1d4ed8);
+				border-block-end-color: var(--bsg-primary-light, #93c5fd);
 			}
 
 			/* Style: Compact */
@@ -630,17 +631,14 @@ class Typography extends \Bricks\Element {
 			}
 
 			.bsg-typography--compact .bsg-typography-item {
+				--_label-font-size: 0.75em;
+				--_meta-font-size: 0.75em;
 				gap: 0.25em;
 				padding-block-end: 0.5em;
 			}
 
-			.bsg-typography--compact .bsg-typography-item__label {
-				font-size: 0.75em;
-			}
-
 			.bsg-typography--compact .bsg-typography-item__meta {
 				gap: 0.5em;
-				font-size: 0.75em;
 			}
 
 			} /* end @layer bsg */

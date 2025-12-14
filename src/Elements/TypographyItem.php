@@ -477,12 +477,26 @@ class TypographyItem extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-typography-item {
+				--_label-color: var(--bsg-typography-item-label-color, var(--bsg-neutral-medium, #6b7280));
+				--_label-font-size: var(--bsg-typography-item-label-font-size, 0.75em);
+				--_label-font-weight: var(--bsg-typography-item-label-font-weight, 600);
+				--_label-text-transform: var(--bsg-typography-item-label-text-transform, uppercase);
+				--_label-letter-spacing: var(--bsg-typography-item-label-letter-spacing, 0.05em);
+				--_meta-font-size: var(--bsg-typography-item-meta-font-size, 0.75em);
+				--_meta-color: var(--bsg-typography-item-meta-color, var(--bsg-neutral-medium, #6b7280));
+				--_meta-bg: var(--bsg-typography-item-meta-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_meta-text-color: var(--bsg-typography-item-meta-text-color, inherit);
+				--_meta-label-color: var(--bsg-typography-item-meta-label-color, var(--bsg-neutral-darker, #374151));
+			}
+
 			.bsg-typography-item__label {
-				font-size: 0.75em;
-				font-weight: 600;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				color: var(--bsg-typography-label-color, var(--bsg-neutral-medium, #6b7280));
+				font-size: var(--_label-font-size);
+				font-weight: var(--_label-font-weight);
+				text-transform: var(--_label-text-transform);
+				letter-spacing: var(--_label-letter-spacing);
+				color: var(--_label-color);
 			}
 
 			.bsg-typography-item__sample-wrapper {
@@ -495,21 +509,21 @@ class TypographyItem extends \Bricks\Element {
 			}
 
 			.bsg-typography-item__meta {
-				font-size: 0.75em;
+				font-size: var(--_meta-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_meta-color);
 			}
 
 			.bsg-typography-item__meta > span {
-				background: var(--bsg-typography-meta-bg, var(--bsg-neutral-light, #f3f4f6));
-				color: var(--bsg-typography-meta-color, inherit);
+				background: var(--_meta-bg);
+				color: var(--_meta-text-color);
 				padding: 0.25em 0.5em;
 				border-radius: 0.25em;
 			}
 
 			.bsg-typography-item__meta-label {
 				font-weight: 600;
-				color: var(--bsg-neutral-darker, #374151);
+				color: var(--_meta-label-color);
 			}
 			} /* end @layer bsg */
 		';

@@ -771,11 +771,24 @@ class Colors extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-colors {
+				--_toggle-switch-width: var(--bsg-colors-toggle-switch-width, 1.5em);
+				--_toggle-switch-height: var(--bsg-colors-toggle-switch-height, 0.875em);
+				--_toggle-switch-bg: var(--bsg-colors-toggle-switch-bg, var(--bsg-border-color, #d1d5db));
+				--_toggle-switch-active-bg: var(--bsg-colors-toggle-switch-active-bg, var(--bsg-primary, #3b82f6));
+				--_toggle-label-font-size: var(--bsg-colors-toggle-label-font-size, 0.6875em);
+				--_toggle-label-color: var(--bsg-colors-toggle-label-color, var(--bsg-neutral-medium, #6b7280));
+				--_glossary-bg: var(--bsg-colors-glossary-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_glossary-title-color: var(--bsg-colors-glossary-title-color, var(--bsg-neutral-darker, #1f2937));
+				--_glossary-text-color: var(--bsg-colors-glossary-text-color, var(--bsg-neutral-medium, #6b7280));
+			}
+
 			.bsg-colors__toggle-switch {
 				position: relative;
-				width: 1.5em;
-				height: 0.875em;
-				background: var(--bsg-border-color, #d1d5db);
+				width: var(--_toggle-switch-width);
+				height: var(--_toggle-switch-height);
+				background: var(--_toggle-switch-bg);
 				border-radius: 0.4375em;
 				transition: background 0.2s ease;
 			}
@@ -793,7 +806,7 @@ class Colors extends \Bricks\Element {
 			}
 
 			.bsg-colors__toggle-input:checked + .bsg-colors__toggle-switch {
-				background: var(--bsg-primary, #3b82f6);
+				background: var(--_toggle-switch-active-bg);
 			}
 
 			.bsg-colors__toggle-input:checked + .bsg-colors__toggle-switch::after {
@@ -801,12 +814,12 @@ class Colors extends \Bricks\Element {
 			}
 
 			.bsg-colors__toggle-label {
-				font-size: 0.6875em;
-				color: var(--bsg-neutral-medium, #6b7280);
+				font-size: var(--_toggle-label-font-size);
+				color: var(--_toggle-label-color);
 			}
 
 			.bsg-colors__glossary-inner {
-				background: var(--bsg-neutral-light, #f3f4f6);
+				background: var(--_glossary-bg);
 				border-radius: var(--bsg-radius-s, 0.5em);
 			}
 
@@ -814,14 +827,14 @@ class Colors extends \Bricks\Element {
 				margin: 0 0 0.5em 0;
 				font-size: 0.8125em;
 				font-weight: 600;
-				color: var(--bsg-neutral-darker, #1f2937);
+				color: var(--_glossary-title-color);
 			}
 
 			.bsg-colors__glossary-text {
 				margin: 0;
 				font-size: 0.75em;
 				line-height: 1.5;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_glossary-text-color);
 			}
 
 			.bsg-colors__glossary-text--small {
@@ -833,7 +846,7 @@ class Colors extends \Bricks\Element {
 				padding-left: 1em;
 				font-size: 0.75em;
 				line-height: 1.6;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_glossary-text-color);
 			}
 
 			.bsg-colors__glossary-list li {
@@ -877,7 +890,7 @@ class Colors extends \Bricks\Element {
 
 			.bsg-colors__glossary-badge-desc {
 				font-size: 0.6875em;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_glossary-text-color);
 			}
 			} /* end @layer bsg */
 		';

@@ -337,33 +337,50 @@ class BoxShadowsItem extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-shadows-item {
+				--_box-size: var(--bsg-shadows-item-box-size, 7.5em);
+				--_box-bg: var(--bsg-shadows-item-box-bg, var(--bsg-neutral-light, #e5e7eb));
+				--_box-border-color: var(--bsg-shadows-item-box-border-color, var(--bsg-border-color, #d1d5db));
+				--_box-radius: var(--bsg-shadows-item-box-radius, 0.5em);
+				--_label-font-weight: var(--bsg-shadows-item-label-font-weight, 600);
+				--_label-font-size: var(--bsg-shadows-item-label-font-size, 0.875em);
+				--_label-color: var(--bsg-shadows-item-label-color, var(--bsg-neutral-darker, #374151));
+				--_variable-font-size: var(--bsg-shadows-item-variable-font-size, 0.75em);
+				--_variable-color: var(--bsg-shadows-item-variable-color, var(--bsg-neutral-medium, #6b7280));
+				--_variable-bg: var(--bsg-shadows-item-variable-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_value-font-size: var(--bsg-shadows-item-value-font-size, 0.75em);
+				--_value-color: var(--bsg-shadows-item-value-color, var(--bsg-neutral-medium, #6b7280));
+				--_value-label-color: var(--bsg-shadows-item-value-label-color, var(--bsg-neutral-darker, #374151));
+			}
+
 			.bsg-shadows-item__box {
-				width: 7.5em;
-				height: 7.5em;
-				background-color: var(--bsg-neutral-light, #e5e7eb);
-				border: 2px solid var(--bsg-border-color, #d1d5db);
-				border-radius: 0.5em;
+				width: var(--_box-size);
+				height: var(--_box-size);
+				background-color: var(--_box-bg);
+				border: 2px solid var(--_box-border-color);
+				border-radius: var(--_box-radius);
 			}
 
 			.bsg-shadows-item__label {
-				font-weight: 600;
-				font-size: 0.875em;
-				color: var(--bsg-neutral-darker, #374151);
+				font-weight: var(--_label-font-weight);
+				font-size: var(--_label-font-size);
+				color: var(--_label-color);
 			}
 
 			.bsg-shadows-item__variable {
-				font-size: 0.75em;
+				font-size: var(--_variable-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
-				background: var(--bsg-neutral-light, #f3f4f6);
+				color: var(--_variable-color);
+				background: var(--_variable-bg);
 				padding: 0.125em 0.375em;
 				border-radius: 0.25em;
 			}
 
 			.bsg-shadows-item__value {
-				font-size: 0.75em;
+				font-size: var(--_value-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_value-color);
 				max-width: 12.5em;
 				word-break: break-all;
 				text-align: center;
@@ -371,7 +388,7 @@ class BoxShadowsItem extends \Bricks\Element {
 
 			.bsg-shadows-item__value-label {
 				font-weight: 600;
-				color: var(--bsg-neutral-darker, #374151);
+				color: var(--_value-label-color);
 			}
 			} /* end @layer bsg */
 		';

@@ -335,37 +335,53 @@ class RadiiItem extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-radii-item {
+				--_box-size: var(--bsg-radii-item-box-size, 6.25em);
+				--_box-bg: var(--bsg-radii-item-box-bg, var(--bsg-neutral-light, #e5e7eb));
+				--_box-border-color: var(--bsg-radii-item-box-border-color, var(--bsg-border-color, #d1d5db));
+				--_label-font-weight: var(--bsg-radii-item-label-font-weight, 600);
+				--_label-font-size: var(--bsg-radii-item-label-font-size, 0.875em);
+				--_label-color: var(--bsg-radii-item-label-color, var(--bsg-neutral-darker, #374151));
+				--_variable-font-size: var(--bsg-radii-item-variable-font-size, 0.75em);
+				--_variable-color: var(--bsg-radii-item-variable-color, var(--bsg-neutral-medium, #6b7280));
+				--_variable-bg: var(--bsg-radii-item-variable-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_value-font-size: var(--bsg-radii-item-value-font-size, 0.75em);
+				--_value-color: var(--bsg-radii-item-value-color, var(--bsg-neutral-medium, #6b7280));
+				--_value-label-color: var(--bsg-radii-item-value-label-color, var(--bsg-neutral-darker, #374151));
+			}
+
 			.bsg-radii-item__box {
-				width: 6.25em;
-				height: 6.25em;
-				background-color: var(--bsg-neutral-light, #e5e7eb);
-				border: 2px solid var(--bsg-border-color, #d1d5db);
+				width: var(--_box-size);
+				height: var(--_box-size);
+				background-color: var(--_box-bg);
+				border: 2px solid var(--_box-border-color);
 			}
 
 			.bsg-radii-item__label {
-				font-weight: 600;
-				font-size: 0.875em;
-				color: var(--bsg-neutral-darker, #374151);
+				font-weight: var(--_label-font-weight);
+				font-size: var(--_label-font-size);
+				color: var(--_label-color);
 			}
 
 			.bsg-radii-item__variable {
-				font-size: 0.75em;
+				font-size: var(--_variable-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
-				background: var(--bsg-neutral-light, #f3f4f6);
+				color: var(--_variable-color);
+				background: var(--_variable-bg);
 				padding: 0.125em 0.375em;
 				border-radius: 0.25em;
 			}
 
 			.bsg-radii-item__value {
-				font-size: 0.75em;
+				font-size: var(--_value-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
+				color: var(--_value-color);
 			}
 
 			.bsg-radii-item__value-label {
 				font-weight: 600;
-				color: var(--bsg-neutral-darker, #374151);
+				color: var(--_value-label-color);
 			}
 			} /* end @layer bsg */
 		';

@@ -497,12 +497,22 @@ class Buttons extends \Bricks\Element {
 			}
 
 			@layer bsg {
-			/* Style: Minimal */
+			/* === Settings === */
+			.bsg-buttons {
+				--_toggle-switch-width: var(--bsg-buttons-toggle-switch-width, 1.5em);
+				--_toggle-switch-height: var(--bsg-buttons-toggle-switch-height, 0.875em);
+				--_toggle-switch-bg: var(--bsg-buttons-toggle-switch-bg, var(--bsg-border-color, #d1d5db));
+				--_toggle-switch-active-bg: var(--bsg-buttons-toggle-switch-active-bg, var(--bsg-primary, #3b82f6));
+				--_toggle-label-font-size: var(--bsg-buttons-toggle-label-font-size, 0.6875em);
+				--_toggle-label-color: var(--bsg-buttons-toggle-label-color, var(--bsg-neutral-medium, #6b7280));
+			}
+
+			/* Style: Minimal - override item settings */
 			.bsg-buttons--minimal .bsg-buttons-item__classes {
 				display: none;
 			}
 
-			/* Style: Compact */
+			/* Style: Compact - override item settings */
 			.bsg-buttons--compact {
 				gap: 1em;
 			}
@@ -513,22 +523,16 @@ class Buttons extends \Bricks\Element {
 			}
 
 			.bsg-buttons--compact .bsg-buttons-item {
+				--_description-font-size: 0.75em;
+				--_classes-font-size: 0.625em;
 				gap: 0.5em;
-			}
-
-			.bsg-buttons--compact .bsg-buttons-item__description {
-				font-size: 0.75em;
-			}
-
-			.bsg-buttons--compact .bsg-buttons-item__classes {
-				font-size: 0.625em;
 			}
 
 			.bsg-buttons__toggle-switch {
 				position: relative;
-				width: 1.5em;
-				height: 0.875em;
-				background: var(--bsg-border-color, #d1d5db);
+				width: var(--_toggle-switch-width);
+				height: var(--_toggle-switch-height);
+				background: var(--_toggle-switch-bg);
 				border-radius: 0.4375em;
 				transition: background 0.2s ease;
 			}
@@ -546,7 +550,7 @@ class Buttons extends \Bricks\Element {
 			}
 
 			.bsg-buttons__toggle-input:checked + .bsg-buttons__toggle-switch {
-				background: var(--bsg-primary, #3b82f6);
+				background: var(--_toggle-switch-active-bg);
 			}
 
 			.bsg-buttons__toggle-input:checked + .bsg-buttons__toggle-switch::after {
@@ -554,8 +558,8 @@ class Buttons extends \Bricks\Element {
 			}
 
 			.bsg-buttons__toggle-label {
-				font-size: 0.6875em;
-				color: var(--bsg-neutral-medium, #6b7280);
+				font-size: var(--_toggle-label-font-size);
+				color: var(--_toggle-label-color);
 			}
 			} /* end @layer bsg */
 		';

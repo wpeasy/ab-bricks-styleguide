@@ -479,18 +479,28 @@ class ButtonsItem extends \Bricks\Element {
 			}
 
 			@layer bsg {
+			/* === Settings === */
+			.bsg-buttons-item {
+				--_description-font-weight: var(--bsg-buttons-item-description-font-weight, 600);
+				--_description-font-size: var(--bsg-buttons-item-description-font-size, 0.875em);
+				--_description-color: var(--bsg-buttons-item-description-color, var(--bsg-neutral-darker, #374151));
+				--_classes-font-size: var(--bsg-buttons-item-classes-font-size, 0.75em);
+				--_classes-color: var(--bsg-buttons-item-classes-color, var(--bsg-neutral-medium, #6b7280));
+				--_classes-bg: var(--bsg-buttons-item-classes-bg, var(--bsg-neutral-light, #f3f4f6));
+			}
+
 			.bsg-buttons-item__description {
-				font-weight: 600;
-				font-size: 0.875em;
+				font-weight: var(--_description-font-weight);
+				font-size: var(--_description-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-darker, #374151);
+				color: var(--_description-color);
 			}
 
 			.bsg-buttons-item__classes {
-				font-size: 0.75em;
+				font-size: var(--_classes-font-size);
 				line-height: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
-				background: var(--bsg-neutral-light, #f3f4f6);
+				color: var(--_classes-color);
+				background: var(--_classes-bg);
 				padding: 0.125em 0.375em;
 				border-radius: var(--bsg-radius-xs, 0.25em);
 				word-spacing: 0.25em;

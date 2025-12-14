@@ -480,68 +480,67 @@ class Spacing extends \Bricks\Element {
 			}
 
 			@layer bsg {
-			.bsg-spacing__placeholder {
-				padding: 2em;
-				background: var(--bsg-neutral-light, #f3f4f6);
-				border: 2px dashed var(--bsg-border-color, #d1d5db);
-				border-radius: 0.5em;
-				text-align: center;
-				color: var(--bsg-neutral-medium, #6b7280);
+			/* === Settings === */
+			.bsg-spacing {
+				--_placeholder-padding: var(--bsg-spacing-placeholder-padding, 2em);
+				--_placeholder-bg: var(--bsg-spacing-placeholder-bg, var(--bsg-neutral-light, #f3f4f6));
+				--_placeholder-border-color: var(--bsg-spacing-placeholder-border-color, var(--bsg-border-color, #d1d5db));
+				--_placeholder-color: var(--bsg-spacing-placeholder-color, var(--bsg-neutral-medium, #6b7280));
 			}
 
-			/* Style: Minimal */
-			.bsg-spacing--minimal .bsg-spacing-item__label {
-				font-weight: 400;
+			.bsg-spacing__placeholder {
+				padding: var(--_placeholder-padding);
+				background: var(--_placeholder-bg);
+				border: 2px dashed var(--_placeholder-border-color);
+				border-radius: 0.5em;
+				text-align: center;
+				color: var(--_placeholder-color);
+			}
+
+			/* Style: Minimal - override item settings */
+			.bsg-spacing--minimal .bsg-spacing-item {
+				--_label-font-weight: 400;
 			}
 
 			.bsg-spacing--minimal .bsg-spacing-item__variable {
 				display: none;
 			}
 
-			/* Style: Bold */
-			.bsg-spacing--bold .bsg-spacing-item__label {
-				font-size: 0.875em;
-				font-weight: 700;
+			/* Style: Bold - override item settings */
+			.bsg-spacing--bold .bsg-spacing-item {
+				--_label-font-size: 0.875em;
+				--_label-font-weight: 700;
 			}
 
 			.bsg-spacing--bold .bsg-spacing-item__bar {
 				--bsg-bar-thickness: 2em;
 			}
 
-			/* Style: Colourful */
+			/* Style: Colourful - override item settings */
+			.bsg-spacing--colourful .bsg-spacing-item {
+				--_label-color: var(--bsg-primary, #3b82f6);
+				--_variable-bg: var(--bsg-primary-light, #dbeafe);
+				--_variable-color: var(--bsg-primary-dark, #1d4ed8);
+			}
+
 			.bsg-spacing--colourful .bsg-spacing-item__bar {
 				background: linear-gradient(90deg, var(--bsg-primary, #3b82f6), var(--bsg-secondary, #8b5cf6));
 			}
 
-			.bsg-spacing--colourful .bsg-spacing-item__label {
-				color: var(--bsg-primary, #3b82f6);
-			}
-
-			.bsg-spacing--colourful .bsg-spacing-item__variable {
-				background: var(--bsg-primary-light, #dbeafe);
-				color: var(--bsg-primary-dark, #1d4ed8);
-			}
-
-			/* Style: Compact */
+			/* Style: Compact - override item settings */
 			.bsg-spacing--compact {
 				gap: 0.25em;
 			}
 
 			.bsg-spacing--compact .bsg-spacing-item {
+				--_label-font-size: 0.75em;
+				--_variable-font-size: 0.75em;
 				gap: 0.5em;
 			}
 
 			.bsg-spacing--compact .bsg-spacing-item__info {
 				min-width: 5em;
 				gap: 0.125em;
-			}
-
-			.bsg-spacing--compact .bsg-spacing-item__label {
-				font-size: 0.75em;
-			}
-
-			.bsg-spacing--compact .bsg-spacing-item__variable {
-				font-size: 0.75em;
 			}
 
 			.bsg-spacing--compact .bsg-spacing-item__bar {

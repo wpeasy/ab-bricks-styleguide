@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Bricks Style Guide
  * Description: Adds Svelte based Elements to Bricks Builder for creating Style Guides
- * Version: 0.0.15-beta
+ * Version: 0.0.16-beta
  * Author: WP Easy
  * Author URI: https://wpeasy.au
  * License: GPL v2 or later
@@ -21,7 +21,7 @@ use AB\BricksSG\Framework\FrameworkDetector;
 defined( 'ABSPATH' ) || exit;
 
 // Plugin constants.
-define( 'BRICKS_SG_VERSION', '0.0.15-beta' );
+define( 'BRICKS_SG_VERSION', '0.0.16-beta' );
 define( 'BRICKS_SG_PLUGIN_FILE', __FILE__ );
 define( 'BRICKS_SG_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BRICKS_SG_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

@@ -196,12 +196,12 @@ class Colors extends \Bricks\Element {
 		];
 
 		$this->controls['gap'] = [
-			'group'       => 'layout',
-			'label'       => esc_html__( 'Gap', 'bricks-style-guide' ),
-			'type'        => 'number',
-			'units'       => true,
-			'placeholder' => '2em',
-			'css'         => [
+			'group'   => 'layout',
+			'label'   => esc_html__( 'Gap', 'bricks-style-guide' ),
+			'type'    => 'number',
+			'units'   => true,
+			'default' => '2em',
+			'css'     => [
 				[
 					'property' => 'gap',
 					'selector' => '',
@@ -386,6 +386,23 @@ class Colors extends \Bricks\Element {
 				],
 				[
 					'property' => 'border-radius',
+					'selector' => '.bsg-colors-item__base',
+				],
+			],
+		];
+
+		$this->controls['parentSwatchBorder'] = [
+			'group'    => 'styleOverride',
+			'label'    => esc_html__( 'Swatch Border', 'bricks-style-guide' ),
+			'type'     => 'border',
+			'required' => [ 'overrideChildStyle', '!=', '' ],
+			'css'      => [
+				[
+					'property' => 'border',
+					'selector' => '.bsg-colors-item__swatch',
+				],
+				[
+					'property' => 'border',
 					'selector' => '.bsg-colors-item__base',
 				],
 			],
@@ -630,7 +647,6 @@ class Colors extends \Bricks\Element {
 				display: flex;
 				flex-direction: row;
 				flex-wrap: wrap;
-				gap: 2em;
 			}
 
 			/* Parent display override styles */

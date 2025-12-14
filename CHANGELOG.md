@@ -2,6 +2,16 @@
 
 All notable changes to Bricks Style Guide will be documented in this file.
 
+## [0.0.14-beta] - 2025-12-14
+
+### Added
+- **Colors Element**: Border control for swatches on ColorsItem and parent Style Override
+- **Colors Element**: Gap control now uses default value for consistent builder/frontend behavior
+
+### Fixed
+- **Colors Element**: Gap control now works in Bricks Builder (removed hardcoded CSS value)
+- **Spacing Element**: Vertical bars now display correct heights in Bricks Builder (removed `height: auto` override)
+
 ## [0.0.13-beta] - 2025-12-14
 
 ### Added

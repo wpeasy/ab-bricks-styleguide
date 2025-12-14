@@ -246,6 +246,22 @@ class ColorsItem extends \Bricks\Element {
 			],
 		];
 
+		$this->controls['swatchBorder'] = [
+			'group' => 'swatchStyle',
+			'label' => esc_html__( 'Border', 'bricks-style-guide' ),
+			'type'  => 'border',
+			'css'   => [
+				[
+					'property' => 'border',
+					'selector' => '.bsg-colors-item__swatch',
+				],
+				[
+					'property' => 'border',
+					'selector' => '.bsg-colors-item__base',
+				],
+			],
+		];
+
 		$this->controls['gridGap'] = [
 			'group'       => 'swatchStyle',
 			'label'       => esc_html__( 'Grid Gap', 'bricks-style-guide' ),

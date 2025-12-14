@@ -1,6 +1,6 @@
 {
   "name": "bricks-style-guide-admin",
-  "version": "0.0.17-beta",
+  "version": "0.0.18-beta",
   "private": true,
   "type": "module",
   "scripts": {

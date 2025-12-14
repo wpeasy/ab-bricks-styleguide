@@ -337,17 +337,46 @@ class RadiiItem extends \Bricks\Element {
 			@layer bsg {
 			/* === Settings === */
 			.bsg-radii-item {
+				/* Box Style */
 				--_box-size: var(--bsg-radii-item-box-size, 6.25em);
 				--_box-bg: var(--bsg-radii-item-box-bg, var(--bsg-neutral-light, #e5e7eb));
 				--_box-border-color: var(--bsg-radii-item-box-border-color, var(--bsg-border-color, #d1d5db));
-				--_label-font-weight: var(--bsg-radii-item-label-font-weight, 600);
+
+				/* Label Typography */
+				--_label-font-family: var(--bsg-radii-item-label-font-family, inherit);
 				--_label-font-size: var(--bsg-radii-item-label-font-size, 0.875em);
+				--_label-font-weight: var(--bsg-radii-item-label-font-weight, 600);
+				--_label-line-height: var(--bsg-radii-item-label-line-height, 1.4);
+				--_label-letter-spacing: var(--bsg-radii-item-label-letter-spacing, normal);
+				--_label-text-transform: var(--bsg-radii-item-label-text-transform, none);
 				--_label-color: var(--bsg-radii-item-label-color, var(--bsg-neutral-darker, #374151));
+
+				/* Variable Typography */
+				--_variable-font-family: var(--bsg-radii-item-variable-font-family, inherit);
 				--_variable-font-size: var(--bsg-radii-item-variable-font-size, 0.75em);
+				--_variable-font-weight: var(--bsg-radii-item-variable-font-weight, 400);
+				--_variable-line-height: var(--bsg-radii-item-variable-line-height, 1);
+				--_variable-letter-spacing: var(--bsg-radii-item-variable-letter-spacing, normal);
+				--_variable-text-transform: var(--bsg-radii-item-variable-text-transform, none);
 				--_variable-color: var(--bsg-radii-item-variable-color, var(--bsg-neutral-medium, #6b7280));
 				--_variable-bg: var(--bsg-radii-item-variable-bg, var(--bsg-neutral-light, #f3f4f6));
+
+				/* Value Typography */
+				--_value-font-family: var(--bsg-radii-item-value-font-family, inherit);
 				--_value-font-size: var(--bsg-radii-item-value-font-size, 0.75em);
+				--_value-font-weight: var(--bsg-radii-item-value-font-weight, 400);
+				--_value-line-height: var(--bsg-radii-item-value-line-height, 1);
+				--_value-letter-spacing: var(--bsg-radii-item-value-letter-spacing, normal);
+				--_value-text-transform: var(--bsg-radii-item-value-text-transform, none);
 				--_value-color: var(--bsg-radii-item-value-color, var(--bsg-neutral-medium, #6b7280));
+
+				/* Value Label Typography */
+				--_value-label-font-family: var(--bsg-radii-item-value-label-font-family, inherit);
+				--_value-label-font-size: var(--bsg-radii-item-value-label-font-size, inherit);
+				--_value-label-font-weight: var(--bsg-radii-item-value-label-font-weight, 600);
+				--_value-label-line-height: var(--bsg-radii-item-value-label-line-height, inherit);
+				--_value-label-letter-spacing: var(--bsg-radii-item-value-label-letter-spacing, normal);
+				--_value-label-text-transform: var(--bsg-radii-item-value-label-text-transform, none);
 				--_value-label-color: var(--bsg-radii-item-value-label-color, var(--bsg-neutral-darker, #374151));
 			}
 
@@ -359,14 +388,22 @@ class RadiiItem extends \Bricks\Element {
 			}
 
 			.bsg-radii-item__label {
-				font-weight: var(--_label-font-weight);
+				font-family: var(--_label-font-family);
 				font-size: var(--_label-font-size);
+				font-weight: var(--_label-font-weight);
+				line-height: var(--_label-line-height);
+				letter-spacing: var(--_label-letter-spacing);
+				text-transform: var(--_label-text-transform);
 				color: var(--_label-color);
 			}
 
 			.bsg-radii-item__variable {
+				font-family: var(--_variable-font-family);
 				font-size: var(--_variable-font-size);
-				line-height: 1;
+				font-weight: var(--_variable-font-weight);
+				line-height: var(--_variable-line-height);
+				letter-spacing: var(--_variable-letter-spacing);
+				text-transform: var(--_variable-text-transform);
 				color: var(--_variable-color);
 				background: var(--_variable-bg);
 				padding: 0.125em 0.375em;
@@ -374,13 +411,22 @@ class RadiiItem extends \Bricks\Element {
 			}
 
 			.bsg-radii-item__value {
+				font-family: var(--_value-font-family);
 				font-size: var(--_value-font-size);
-				line-height: 1;
+				font-weight: var(--_value-font-weight);
+				line-height: var(--_value-line-height);
+				letter-spacing: var(--_value-letter-spacing);
+				text-transform: var(--_value-text-transform);
 				color: var(--_value-color);
 			}
 
 			.bsg-radii-item__value-label {
-				font-weight: 600;
+				font-family: var(--_value-label-font-family);
+				font-size: var(--_value-label-font-size);
+				font-weight: var(--_value-label-font-weight);
+				line-height: var(--_value-label-line-height);
+				letter-spacing: var(--_value-label-letter-spacing);
+				text-transform: var(--_value-label-text-transform);
 				color: var(--_value-label-color);
 			}
 			} /* end @layer bsg */

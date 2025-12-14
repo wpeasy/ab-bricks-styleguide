@@ -481,24 +481,43 @@ class ButtonsItem extends \Bricks\Element {
 			@layer bsg {
 			/* === Settings === */
 			.bsg-buttons-item {
-				--_description-font-weight: var(--bsg-buttons-item-description-font-weight, 600);
+				/* Description Typography */
+				--_description-font-family: var(--bsg-buttons-item-description-font-family, inherit);
 				--_description-font-size: var(--bsg-buttons-item-description-font-size, 0.875em);
+				--_description-font-weight: var(--bsg-buttons-item-description-font-weight, 600);
+				--_description-line-height: var(--bsg-buttons-item-description-line-height, 1);
+				--_description-letter-spacing: var(--bsg-buttons-item-description-letter-spacing, normal);
+				--_description-text-transform: var(--bsg-buttons-item-description-text-transform, none);
 				--_description-color: var(--bsg-buttons-item-description-color, var(--bsg-neutral-darker, #374151));
+
+				/* Classes Typography */
+				--_classes-font-family: var(--bsg-buttons-item-classes-font-family, inherit);
 				--_classes-font-size: var(--bsg-buttons-item-classes-font-size, 0.75em);
+				--_classes-font-weight: var(--bsg-buttons-item-classes-font-weight, 400);
+				--_classes-line-height: var(--bsg-buttons-item-classes-line-height, 1);
+				--_classes-letter-spacing: var(--bsg-buttons-item-classes-letter-spacing, normal);
+				--_classes-text-transform: var(--bsg-buttons-item-classes-text-transform, none);
 				--_classes-color: var(--bsg-buttons-item-classes-color, var(--bsg-neutral-medium, #6b7280));
 				--_classes-bg: var(--bsg-buttons-item-classes-bg, var(--bsg-neutral-light, #f3f4f6));
 			}
 
 			.bsg-buttons-item__description {
-				font-weight: var(--_description-font-weight);
+				font-family: var(--_description-font-family);
 				font-size: var(--_description-font-size);
-				line-height: 1;
+				font-weight: var(--_description-font-weight);
+				line-height: var(--_description-line-height);
+				letter-spacing: var(--_description-letter-spacing);
+				text-transform: var(--_description-text-transform);
 				color: var(--_description-color);
 			}
 
 			.bsg-buttons-item__classes {
+				font-family: var(--_classes-font-family);
 				font-size: var(--_classes-font-size);
-				line-height: 1;
+				font-weight: var(--_classes-font-weight);
+				line-height: var(--_classes-line-height);
+				letter-spacing: var(--_classes-letter-spacing);
+				text-transform: var(--_classes-text-transform);
 				color: var(--_classes-color);
 				background: var(--_classes-bg);
 				padding: 0.125em 0.375em;

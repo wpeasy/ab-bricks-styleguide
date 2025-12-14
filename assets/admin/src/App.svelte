@@ -140,13 +140,48 @@
   ];
 
   const colorsItemVars = [
+    // Placeholder
     '--bsg-colors-item-placeholder-padding',
     '--bsg-colors-item-placeholder-bg',
     '--bsg-colors-item-placeholder-border-color',
     '--bsg-colors-item-placeholder-color',
+    // Label Typography
+    '--bsg-colors-item-label-font-family',
     '--bsg-colors-item-label-font-size',
     '--bsg-colors-item-label-font-weight',
-    '--bsg-colors-item-label-color'
+    '--bsg-colors-item-label-line-height',
+    '--bsg-colors-item-label-letter-spacing',
+    '--bsg-colors-item-label-text-transform',
+    '--bsg-colors-item-label-color',
+    // Menu Header Typography
+    '--bsg-colors-item-menu-header-font-family',
+    '--bsg-colors-item-menu-header-font-size',
+    '--bsg-colors-item-menu-header-font-weight',
+    '--bsg-colors-item-menu-header-line-height',
+    '--bsg-colors-item-menu-header-letter-spacing',
+    '--bsg-colors-item-menu-header-text-transform',
+    '--bsg-colors-item-menu-header-color',
+    // Menu Code Typography
+    '--bsg-colors-item-menu-code-font-family',
+    '--bsg-colors-item-menu-code-font-size',
+    '--bsg-colors-item-menu-code-font-weight',
+    '--bsg-colors-item-menu-code-line-height',
+    '--bsg-colors-item-menu-code-letter-spacing',
+    '--bsg-colors-item-menu-code-color',
+    // Menu Button Typography
+    '--bsg-colors-item-menu-btn-font-family',
+    '--bsg-colors-item-menu-btn-font-size',
+    '--bsg-colors-item-menu-btn-font-weight',
+    '--bsg-colors-item-menu-btn-line-height',
+    '--bsg-colors-item-menu-btn-letter-spacing',
+    '--bsg-colors-item-menu-btn-text-transform',
+    // Contrast Label Typography
+    '--bsg-colors-item-contrast-label-font-family',
+    '--bsg-colors-item-contrast-label-font-size',
+    '--bsg-colors-item-contrast-label-font-weight',
+    '--bsg-colors-item-contrast-label-line-height',
+    '--bsg-colors-item-contrast-label-letter-spacing',
+    '--bsg-colors-item-contrast-label-color'
   ];
 
   const colorsVars = [
@@ -211,6 +246,12 @@
       <Alert variant="success">
         <strong>Active Framework:</strong> {frameworkName}
       </Alert>
+
+      {#if isACSS}
+        <Alert variant="warning">
+          <strong>Important:</strong> Some ACSS options may be disabled in your settings. For Style Guide elements to work properly, ensure that the required styles (typography scale, spacing scale, colors, etc.) are enabled in your Automatic CSS dashboard.
+        </Alert>
+      {/if}
 
       {#if isAT}
         <div class="bsg-instructions__section">

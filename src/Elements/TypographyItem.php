@@ -479,23 +479,43 @@ class TypographyItem extends \Bricks\Element {
 			@layer bsg {
 			/* === Settings === */
 			.bsg-typography-item {
-				--_label-color: var(--bsg-typography-item-label-color, var(--bsg-neutral-medium, #6b7280));
+				/* Label Typography */
+				--_label-font-family: var(--bsg-typography-item-label-font-family, inherit);
 				--_label-font-size: var(--bsg-typography-item-label-font-size, 0.75em);
 				--_label-font-weight: var(--bsg-typography-item-label-font-weight, 600);
-				--_label-text-transform: var(--bsg-typography-item-label-text-transform, uppercase);
+				--_label-line-height: var(--bsg-typography-item-label-line-height, 1.4);
 				--_label-letter-spacing: var(--bsg-typography-item-label-letter-spacing, 0.05em);
+				--_label-text-transform: var(--bsg-typography-item-label-text-transform, uppercase);
+				--_label-color: var(--bsg-typography-item-label-color, var(--bsg-neutral-medium, #6b7280));
+
+				/* Meta Typography */
+				--_meta-font-family: var(--bsg-typography-item-meta-font-family, inherit);
 				--_meta-font-size: var(--bsg-typography-item-meta-font-size, 0.75em);
+				--_meta-font-weight: var(--bsg-typography-item-meta-font-weight, 400);
+				--_meta-line-height: var(--bsg-typography-item-meta-line-height, 1);
+				--_meta-letter-spacing: var(--bsg-typography-item-meta-letter-spacing, normal);
+				--_meta-text-transform: var(--bsg-typography-item-meta-text-transform, none);
 				--_meta-color: var(--bsg-typography-item-meta-color, var(--bsg-neutral-medium, #6b7280));
 				--_meta-bg: var(--bsg-typography-item-meta-bg, var(--bsg-neutral-light, #f3f4f6));
 				--_meta-text-color: var(--bsg-typography-item-meta-text-color, inherit);
+
+				/* Meta Label Typography */
+				--_meta-label-font-family: var(--bsg-typography-item-meta-label-font-family, inherit);
+				--_meta-label-font-size: var(--bsg-typography-item-meta-label-font-size, inherit);
+				--_meta-label-font-weight: var(--bsg-typography-item-meta-label-font-weight, 600);
+				--_meta-label-line-height: var(--bsg-typography-item-meta-label-line-height, inherit);
+				--_meta-label-letter-spacing: var(--bsg-typography-item-meta-label-letter-spacing, normal);
+				--_meta-label-text-transform: var(--bsg-typography-item-meta-label-text-transform, none);
 				--_meta-label-color: var(--bsg-typography-item-meta-label-color, var(--bsg-neutral-darker, #374151));
 			}
 
 			.bsg-typography-item__label {
+				font-family: var(--_label-font-family);
 				font-size: var(--_label-font-size);
 				font-weight: var(--_label-font-weight);
-				text-transform: var(--_label-text-transform);
+				line-height: var(--_label-line-height);
 				letter-spacing: var(--_label-letter-spacing);
+				text-transform: var(--_label-text-transform);
 				color: var(--_label-color);
 			}
 
@@ -509,8 +529,12 @@ class TypographyItem extends \Bricks\Element {
 			}
 
 			.bsg-typography-item__meta {
+				font-family: var(--_meta-font-family);
 				font-size: var(--_meta-font-size);
-				line-height: 1;
+				font-weight: var(--_meta-font-weight);
+				line-height: var(--_meta-line-height);
+				letter-spacing: var(--_meta-letter-spacing);
+				text-transform: var(--_meta-text-transform);
 				color: var(--_meta-color);
 			}
 
@@ -522,7 +546,12 @@ class TypographyItem extends \Bricks\Element {
 			}
 
 			.bsg-typography-item__meta-label {
-				font-weight: 600;
+				font-family: var(--_meta-label-font-family);
+				font-size: var(--_meta-label-font-size);
+				font-weight: var(--_meta-label-font-weight);
+				line-height: var(--_meta-label-line-height);
+				letter-spacing: var(--_meta-label-letter-spacing);
+				text-transform: var(--_meta-label-text-transform);
 				color: var(--_meta-label-color);
 			}
 			} /* end @layer bsg */

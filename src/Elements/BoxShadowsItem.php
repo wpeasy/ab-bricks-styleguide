@@ -339,18 +339,47 @@ class BoxShadowsItem extends \Bricks\Element {
 			@layer bsg {
 			/* === Settings === */
 			.bsg-shadows-item {
+				/* Box Style */
 				--_box-size: var(--bsg-shadows-item-box-size, 7.5em);
 				--_box-bg: var(--bsg-shadows-item-box-bg, var(--bsg-neutral-light, #e5e7eb));
 				--_box-border-color: var(--bsg-shadows-item-box-border-color, var(--bsg-border-color, #d1d5db));
 				--_box-radius: var(--bsg-shadows-item-box-radius, 0.5em);
-				--_label-font-weight: var(--bsg-shadows-item-label-font-weight, 600);
+
+				/* Label Typography */
+				--_label-font-family: var(--bsg-shadows-item-label-font-family, inherit);
 				--_label-font-size: var(--bsg-shadows-item-label-font-size, 0.875em);
+				--_label-font-weight: var(--bsg-shadows-item-label-font-weight, 600);
+				--_label-line-height: var(--bsg-shadows-item-label-line-height, 1.4);
+				--_label-letter-spacing: var(--bsg-shadows-item-label-letter-spacing, normal);
+				--_label-text-transform: var(--bsg-shadows-item-label-text-transform, none);
 				--_label-color: var(--bsg-shadows-item-label-color, var(--bsg-neutral-darker, #374151));
+
+				/* Variable Typography */
+				--_variable-font-family: var(--bsg-shadows-item-variable-font-family, inherit);
 				--_variable-font-size: var(--bsg-shadows-item-variable-font-size, 0.75em);
+				--_variable-font-weight: var(--bsg-shadows-item-variable-font-weight, 400);
+				--_variable-line-height: var(--bsg-shadows-item-variable-line-height, 1);
+				--_variable-letter-spacing: var(--bsg-shadows-item-variable-letter-spacing, normal);
+				--_variable-text-transform: var(--bsg-shadows-item-variable-text-transform, none);
 				--_variable-color: var(--bsg-shadows-item-variable-color, var(--bsg-neutral-medium, #6b7280));
 				--_variable-bg: var(--bsg-shadows-item-variable-bg, var(--bsg-neutral-light, #f3f4f6));
+
+				/* Value Typography */
+				--_value-font-family: var(--bsg-shadows-item-value-font-family, inherit);
 				--_value-font-size: var(--bsg-shadows-item-value-font-size, 0.75em);
+				--_value-font-weight: var(--bsg-shadows-item-value-font-weight, 400);
+				--_value-line-height: var(--bsg-shadows-item-value-line-height, 1);
+				--_value-letter-spacing: var(--bsg-shadows-item-value-letter-spacing, normal);
+				--_value-text-transform: var(--bsg-shadows-item-value-text-transform, none);
 				--_value-color: var(--bsg-shadows-item-value-color, var(--bsg-neutral-medium, #6b7280));
+
+				/* Value Label Typography */
+				--_value-label-font-family: var(--bsg-shadows-item-value-label-font-family, inherit);
+				--_value-label-font-size: var(--bsg-shadows-item-value-label-font-size, inherit);
+				--_value-label-font-weight: var(--bsg-shadows-item-value-label-font-weight, 600);
+				--_value-label-line-height: var(--bsg-shadows-item-value-label-line-height, inherit);
+				--_value-label-letter-spacing: var(--bsg-shadows-item-value-label-letter-spacing, normal);
+				--_value-label-text-transform: var(--bsg-shadows-item-value-label-text-transform, none);
 				--_value-label-color: var(--bsg-shadows-item-value-label-color, var(--bsg-neutral-darker, #374151));
 			}
 
@@ -363,14 +392,22 @@ class BoxShadowsItem extends \Bricks\Element {
 			}
 
 			.bsg-shadows-item__label {
-				font-weight: var(--_label-font-weight);
+				font-family: var(--_label-font-family);
 				font-size: var(--_label-font-size);
+				font-weight: var(--_label-font-weight);
+				line-height: var(--_label-line-height);
+				letter-spacing: var(--_label-letter-spacing);
+				text-transform: var(--_label-text-transform);
 				color: var(--_label-color);
 			}
 
 			.bsg-shadows-item__variable {
+				font-family: var(--_variable-font-family);
 				font-size: var(--_variable-font-size);
-				line-height: 1;
+				font-weight: var(--_variable-font-weight);
+				line-height: var(--_variable-line-height);
+				letter-spacing: var(--_variable-letter-spacing);
+				text-transform: var(--_variable-text-transform);
 				color: var(--_variable-color);
 				background: var(--_variable-bg);
 				padding: 0.125em 0.375em;
@@ -378,8 +415,12 @@ class BoxShadowsItem extends \Bricks\Element {
 			}
 
 			.bsg-shadows-item__value {
+				font-family: var(--_value-font-family);
 				font-size: var(--_value-font-size);
-				line-height: 1;
+				font-weight: var(--_value-font-weight);
+				line-height: var(--_value-line-height);
+				letter-spacing: var(--_value-letter-spacing);
+				text-transform: var(--_value-text-transform);
 				color: var(--_value-color);
 				max-width: 12.5em;
 				word-break: break-all;
@@ -387,7 +428,12 @@ class BoxShadowsItem extends \Bricks\Element {
 			}
 
 			.bsg-shadows-item__value-label {
-				font-weight: 600;
+				font-family: var(--_value-label-font-family);
+				font-size: var(--_value-label-font-size);
+				font-weight: var(--_value-label-font-weight);
+				line-height: var(--_value-label-line-height);
+				letter-spacing: var(--_value-label-letter-spacing);
+				text-transform: var(--_value-label-text-transform);
 				color: var(--_value-label-color);
 			}
 			} /* end @layer bsg */

@@ -106,6 +106,11 @@ class Radii extends \Bricks\Element {
 			'title' => esc_html__( 'Item Styling', 'bricks-style-guide' ),
 			'tab'   => 'content',
 		];
+
+		$this->control_groups['typographyOverride'] = [
+			'title' => esc_html__( 'Typography Override', 'bricks-style-guide' ),
+			'tab'   => 'content',
+		];
 	}
 
 	/**
@@ -142,6 +147,60 @@ class Radii extends \Bricks\Element {
 			'css'         => [
 				[
 					'property' => 'gap',
+					'selector' => '',
+				],
+			],
+		];
+
+		$this->controls['flexDirection'] = [
+			'group' => 'layout',
+			'label' => esc_html__( 'Direction', 'bricks-style-guide' ),
+			'type'  => 'direction',
+			'css'   => [
+				[
+					'property' => 'flex-direction',
+					'selector' => '',
+				],
+			],
+		];
+
+		$this->controls['flexWrap'] = [
+			'group'   => 'layout',
+			'label'   => esc_html__( 'Wrap', 'bricks-style-guide' ),
+			'type'    => 'select',
+			'options' => [
+				'nowrap'       => esc_html__( 'No Wrap', 'bricks-style-guide' ),
+				'wrap'         => esc_html__( 'Wrap', 'bricks-style-guide' ),
+				'wrap-reverse' => esc_html__( 'Wrap Reverse', 'bricks-style-guide' ),
+			],
+			'inline'  => true,
+			'css'     => [
+				[
+					'property' => 'flex-wrap',
+					'selector' => '',
+				],
+			],
+		];
+
+		$this->controls['alignItems'] = [
+			'group' => 'layout',
+			'label' => esc_html__( 'Align Items', 'bricks-style-guide' ),
+			'type'  => 'align-items',
+			'css'   => [
+				[
+					'property' => 'align-items',
+					'selector' => '',
+				],
+			],
+		];
+
+		$this->controls['justifyContent'] = [
+			'group' => 'layout',
+			'label' => esc_html__( 'Justify Content', 'bricks-style-guide' ),
+			'type'  => 'justify-content',
+			'css'   => [
+				[
+					'property' => 'justify-content',
 					'selector' => '',
 				],
 			],
@@ -282,6 +341,66 @@ class Radii extends \Bricks\Element {
 					'selector' => '.bsg-radii-item__value',
 				],
 			],
+		];
+
+		// Typography Override controls.
+		$this->controls['overrideChildTypography'] = [
+			'group'       => 'typographyOverride',
+			'label'       => esc_html__( 'Override Child Typography Settings', 'bricks-style-guide' ),
+			'type'        => 'checkbox',
+			'description' => esc_html__( 'Enable to control typography settings for all child items from here.', 'bricks-style-guide' ),
+		];
+
+		$this->controls['overrideLabelTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Label Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-radii-item__label',
+				],
+			],
+			'required' => [ 'overrideChildTypography', '!=', '' ],
+		];
+
+		$this->controls['overrideVariableTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Variable Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-radii-item__variable',
+				],
+			],
+			'required' => [ 'overrideChildTypography', '!=', '' ],
+		];
+
+		$this->controls['overrideValueTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Value Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-radii-item__value',
+				],
+			],
+			'required' => [ 'overrideChildTypography', '!=', '' ],
+		];
+
+		$this->controls['overrideValueLabelTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Value Label Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-radii-item__value-label',
+				],
+			],
+			'required' => [ 'overrideChildTypography', '!=', '' ],
 		];
 	}
 

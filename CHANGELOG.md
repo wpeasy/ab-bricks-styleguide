@@ -2,6 +2,31 @@
 
 All notable changes to Bricks Style Guide will be documented in this file.
 
+## [Unreleased]
+
+## [0.0.18-beta] - 2025-12-15
+
+### Added
+- **Typography Override Controls**: All parent elements now have "Typography Override" control group
+  - Allows centralized typography control from parent element
+  - Override checkbox to enable/disable feature
+  - Individual typography controls for each text element type
+- **Colors Element**: "Hide A11Y Switch & Glossary" option in Layout group
+  - Completely removes the accessibility toggle and glossary from the DOM
+- **All Parent Elements**: Flex controls added to Layout group (Direction, Wrap, Align Items, Justify Content)
+- **Full Typography CSS Variables**: All Item elements now expose complete typography properties
+  - font-family, font-size, font-weight, line-height, letter-spacing, text-transform, color
+  - Consistent pattern across Typography, Spacing, Radii, BoxShadows, and Buttons elements
+  - Value Label typography now separately controllable
+- **Admin Instructions**: ACSS warning alert on Requirements tab
+  - Reminds users that ACSS options may be disabled in their settings
+  - Advises enabling required styles for Style Guide elements to work properly
+
+### Changed
+- **Colors Element**: Merged "Style Override" group into "Variations Override" group
+  - Swatch styling controls now under "Variations Override" with the variation visibility controls
+  - Single "Override Child Display Settings" checkbox gates all variation and style controls
+
 ## [0.0.17-beta] - 2025-12-14
 
 ### Added

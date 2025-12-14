@@ -105,6 +105,11 @@ class ColorsItem extends \Bricks\Element {
 			'title' => esc_html__( 'Swatch Style', 'bricks-style-guide' ),
 			'tab'   => 'content',
 		];
+
+		$this->control_groups['typography'] = [
+			'title' => esc_html__( 'Typography', 'bricks-style-guide' ),
+			'tab'   => 'content',
+		];
 	}
 
 	/**
@@ -280,14 +285,63 @@ class ColorsItem extends \Bricks\Element {
 			],
 		];
 
+		// Typography group controls.
 		$this->controls['labelTypography'] = [
-			'group' => 'swatchStyle',
+			'group' => 'typography',
 			'label' => esc_html__( 'Label Typography', 'bricks-style-guide' ),
 			'type'  => 'typography',
 			'css'   => [
 				[
 					'property' => 'font',
 					'selector' => '.bsg-colors-item__label',
+				],
+			],
+		];
+
+		$this->controls['menuHeaderTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Menu Header Typography', 'bricks-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-colors-item__menu-header',
+				],
+			],
+		];
+
+		$this->controls['menuCodeTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Menu Code Typography', 'bricks-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-colors-item__menu-var code',
+				],
+			],
+		];
+
+		$this->controls['menuButtonTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Menu Button Typography', 'bricks-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-colors-item__menu-btn',
+				],
+			],
+		];
+
+		$this->controls['contrastLabelTypography'] = [
+			'group' => 'typography',
+			'label' => esc_html__( 'Contrast Label Typography', 'bricks-style-guide' ),
+			'type'  => 'typography',
+			'css'   => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-colors-item__menu-contrast-label',
 				],
 			],
 		];
@@ -956,13 +1010,53 @@ class ColorsItem extends \Bricks\Element {
 			@layer bsg {
 			/* === Settings === */
 			.bsg-colors-item {
+				/* Placeholder */
 				--_placeholder-padding: var(--bsg-colors-item-placeholder-padding, var(--bsg-space-l, 2rem));
 				--_placeholder-bg: var(--bsg-colors-item-placeholder-bg, var(--bsg-neutral-light, #f3f4f6));
 				--_placeholder-border-color: var(--bsg-colors-item-placeholder-border-color, var(--bsg-border-color, #d1d5db));
 				--_placeholder-color: var(--bsg-colors-item-placeholder-color, var(--bsg-neutral-medium, #6b7280));
+
+				/* Label Typography */
+				--_label-font-family: var(--bsg-colors-item-label-font-family, inherit);
 				--_label-font-size: var(--bsg-colors-item-label-font-size, var(--bsg-text-m, 1.125rem));
 				--_label-font-weight: var(--bsg-colors-item-label-font-weight, 600);
+				--_label-line-height: var(--bsg-colors-item-label-line-height, 1.4);
+				--_label-letter-spacing: var(--bsg-colors-item-label-letter-spacing, normal);
+				--_label-text-transform: var(--bsg-colors-item-label-text-transform, none);
 				--_label-color: var(--bsg-colors-item-label-color, var(--bsg-neutral-darker, #1f2937));
+
+				/* Menu Header Typography */
+				--_menu-header-font-family: var(--bsg-colors-item-menu-header-font-family, inherit);
+				--_menu-header-font-size: var(--bsg-colors-item-menu-header-font-size, var(--bsg-text-s, 0.875rem));
+				--_menu-header-font-weight: var(--bsg-colors-item-menu-header-font-weight, 600);
+				--_menu-header-line-height: var(--bsg-colors-item-menu-header-line-height, 1.4);
+				--_menu-header-letter-spacing: var(--bsg-colors-item-menu-header-letter-spacing, normal);
+				--_menu-header-text-transform: var(--bsg-colors-item-menu-header-text-transform, none);
+				--_menu-header-color: var(--bsg-colors-item-menu-header-color, var(--bsg-neutral-darker, #1f2937));
+
+				/* Menu Code Typography */
+				--_menu-code-font-family: var(--bsg-colors-item-menu-code-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+				--_menu-code-font-size: var(--bsg-colors-item-menu-code-font-size, var(--bsg-text-2xs, 0.75rem));
+				--_menu-code-font-weight: var(--bsg-colors-item-menu-code-font-weight, 400);
+				--_menu-code-line-height: var(--bsg-colors-item-menu-code-line-height, 1.5);
+				--_menu-code-letter-spacing: var(--bsg-colors-item-menu-code-letter-spacing, normal);
+				--_menu-code-color: var(--bsg-colors-item-menu-code-color, var(--bsg-neutral-medium, #6b7280));
+
+				/* Menu Button Typography */
+				--_menu-btn-font-family: var(--bsg-colors-item-menu-btn-font-family, inherit);
+				--_menu-btn-font-size: var(--bsg-colors-item-menu-btn-font-size, var(--bsg-text-2xs, 0.75rem));
+				--_menu-btn-font-weight: var(--bsg-colors-item-menu-btn-font-weight, 500);
+				--_menu-btn-line-height: var(--bsg-colors-item-menu-btn-line-height, 1.4);
+				--_menu-btn-letter-spacing: var(--bsg-colors-item-menu-btn-letter-spacing, normal);
+				--_menu-btn-text-transform: var(--bsg-colors-item-menu-btn-text-transform, none);
+
+				/* Contrast Label Typography */
+				--_contrast-label-font-family: var(--bsg-colors-item-contrast-label-font-family, inherit);
+				--_contrast-label-font-size: var(--bsg-colors-item-contrast-label-font-size, var(--bsg-text-2xs, 0.75rem));
+				--_contrast-label-font-weight: var(--bsg-colors-item-contrast-label-font-weight, 400);
+				--_contrast-label-line-height: var(--bsg-colors-item-contrast-label-line-height, 1.4);
+				--_contrast-label-letter-spacing: var(--bsg-colors-item-contrast-label-letter-spacing, normal);
+				--_contrast-label-color: var(--bsg-colors-item-contrast-label-color, var(--bsg-neutral-medium, #6b7280));
 			}
 
 			.bsg-colors-item__placeholder {
@@ -975,8 +1069,12 @@ class ColorsItem extends \Bricks\Element {
 			}
 
 			.bsg-colors-item__label {
+				font-family: var(--_label-font-family);
 				font-size: var(--_label-font-size);
 				font-weight: var(--_label-font-weight);
+				line-height: var(--_label-line-height);
+				letter-spacing: var(--_label-letter-spacing);
+				text-transform: var(--_label-text-transform);
 				color: var(--_label-color);
 			}
 
@@ -1072,9 +1170,13 @@ class ColorsItem extends \Bricks\Element {
 			}
 
 			.bsg-colors-item__menu-header {
-				font-weight: 600;
-				font-size: var(--bsg-text-s, 0.875rem);
-				color: var(--bsg-neutral-darker, #1f2937);
+				font-family: var(--_menu-header-font-family);
+				font-size: var(--_menu-header-font-size);
+				font-weight: var(--_menu-header-font-weight);
+				line-height: var(--_menu-header-line-height);
+				letter-spacing: var(--_menu-header-letter-spacing);
+				text-transform: var(--_menu-header-text-transform);
+				color: var(--_menu-header-color);
 				margin-bottom: var(--bsg-space-3xs, 0.25rem);
 			}
 
@@ -1099,8 +1201,12 @@ class ColorsItem extends \Bricks\Element {
 			}
 
 			.bsg-colors-item__menu-var code {
-				font-size: var(--bsg-text-2xs, 0.75rem);
-				color: var(--bsg-neutral-medium, #6b7280);
+				font-family: var(--_menu-code-font-family);
+				font-size: var(--_menu-code-font-size);
+				font-weight: var(--_menu-code-font-weight);
+				line-height: var(--_menu-code-line-height);
+				letter-spacing: var(--_menu-code-letter-spacing);
+				color: var(--_menu-code-color);
 				background: var(--bsg-neutral-light, #f3f4f6);
 				padding: var(--bsg-space-3xs, 0.25rem) var(--bsg-space-2xs, 0.375rem);
 				border-radius: var(--bsg-radius-xs, 0.25em);
@@ -1125,8 +1231,12 @@ class ColorsItem extends \Bricks\Element {
 				color: var(--bsg-white, #ffffff);
 				border: none;
 				border-radius: var(--bsg-radius-xs, 0.25em);
-				font-size: var(--bsg-text-2xs, 0.75rem);
-				font-weight: 500;
+				font-family: var(--_menu-btn-font-family);
+				font-size: var(--_menu-btn-font-size);
+				font-weight: var(--_menu-btn-font-weight);
+				line-height: var(--_menu-btn-line-height);
+				letter-spacing: var(--_menu-btn-letter-spacing);
+				text-transform: var(--_menu-btn-text-transform);
 				cursor: pointer;
 				transition: background 0.2s ease;
 				text-align: left;
@@ -1201,7 +1311,12 @@ class ColorsItem extends \Bricks\Element {
 
 			.bsg-colors-item__menu-contrast-label {
 				flex: 1;
-				color: var(--bsg-neutral-medium, #6b7280);
+				font-family: var(--_contrast-label-font-family);
+				font-size: var(--_contrast-label-font-size);
+				font-weight: var(--_contrast-label-font-weight);
+				line-height: var(--_contrast-label-line-height);
+				letter-spacing: var(--_contrast-label-letter-spacing);
+				color: var(--_contrast-label-color);
 			}
 
 			.bsg-colors-item__menu-contrast-value {

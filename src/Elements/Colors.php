@@ -108,8 +108,8 @@ class Colors extends \Bricks\Element {
 			'tab'   => 'content',
 		];
 
-		$this->control_groups['styleOverride'] = [
-			'title' => esc_html__( 'Style Override', 'bricks-style-guide' ),
+		$this->control_groups['typographyOverride'] = [
+			'title' => esc_html__( 'Typography Override', 'bricks-style-guide' ),
 			'tab'   => 'content',
 		];
 	}
@@ -157,11 +157,10 @@ class Colors extends \Bricks\Element {
 
 		// Layout controls - Flex options using Bricks dedicated control types.
 		$this->controls['flexDirection'] = [
-			'group'   => 'layout',
-			'label'   => esc_html__( 'Direction', 'bricks-style-guide' ),
-			'type'    => 'direction',
-			'inline'  => true,
-			'css'     => [
+			'group' => 'layout',
+			'label' => esc_html__( 'Direction', 'bricks-style-guide' ),
+			'type'  => 'direction',
+			'css'   => [
 				[
 					'property' => 'flex-direction',
 					'selector' => '',
@@ -169,27 +168,42 @@ class Colors extends \Bricks\Element {
 			],
 		];
 
-		$this->controls['justifyContent'] = [
+		$this->controls['flexWrap'] = [
 			'group'   => 'layout',
-			'label'   => esc_html__( 'Justify', 'bricks-style-guide' ),
-			'type'    => 'justify-content',
-			'inline'  => true,
+			'label'   => esc_html__( 'Wrap', 'bricks-style-guide' ),
+			'type'    => 'select',
+			'options' => [
+				'nowrap'       => esc_html__( 'No Wrap', 'bricks-style-guide' ),
+				'wrap'         => esc_html__( 'Wrap', 'bricks-style-guide' ),
+				'wrap-reverse' => esc_html__( 'Wrap Reverse', 'bricks-style-guide' ),
+			],
 			'css'     => [
 				[
-					'property' => 'justify-content',
+					'property' => 'flex-wrap',
 					'selector' => '',
 				],
 			],
 		];
 
 		$this->controls['alignItems'] = [
-			'group'   => 'layout',
-			'label'   => esc_html__( 'Align', 'bricks-style-guide' ),
-			'type'    => 'align-items',
-			'inline'  => true,
-			'css'     => [
+			'group' => 'layout',
+			'label' => esc_html__( 'Align Items', 'bricks-style-guide' ),
+			'type'  => 'align-items',
+			'css'   => [
 				[
 					'property' => 'align-items',
+					'selector' => '',
+				],
+			],
+		];
+
+		$this->controls['justifyContent'] = [
+			'group' => 'layout',
+			'label' => esc_html__( 'Justify Content', 'bricks-style-guide' ),
+			'type'  => 'justify-content',
+			'css'   => [
+				[
+					'property' => 'justify-content',
 					'selector' => '',
 				],
 			],
@@ -215,6 +229,14 @@ class Colors extends \Bricks\Element {
 			'type'        => 'checkbox',
 			'rerender'    => true,
 			'description' => esc_html__( 'Show the WCAG contrast standards glossary when A11Y badges are enabled.', 'bricks-style-guide' ),
+		];
+
+		$this->controls['hideA11ySwitch'] = [
+			'group'       => 'layout',
+			'label'       => esc_html__( 'Hide A11Y Switch & Glossary', 'bricks-style-guide' ),
+			'type'        => 'checkbox',
+			'rerender'    => true,
+			'description' => esc_html__( 'Completely removes the accessibility toggle and glossary from the page.', 'bricks-style-guide' ),
 		];
 
 		// Display Override controls.
@@ -261,10 +283,10 @@ class Colors extends \Bricks\Element {
 		// Variations Override controls.
 		$this->controls['overrideChildVariations'] = [
 			'group'       => 'variationsOverride',
-			'label'       => esc_html__( 'Override Child Variation Settings', 'bricks-style-guide' ),
+			'label'       => esc_html__( 'Override Child Display Settings', 'bricks-style-guide' ),
 			'type'        => 'checkbox',
 			'rerender'    => true,
-			'description' => esc_html__( 'Enable to control variation settings for all child items from here.', 'bricks-style-guide' ),
+			'description' => esc_html__( 'Enable to control variation and style settings for all child items from here.', 'bricks-style-guide' ),
 		];
 
 		$this->controls['hideVariations'] = [
@@ -299,22 +321,14 @@ class Colors extends \Bricks\Element {
 			'required' => [ 'overrideChildVariations', '!=', '' ],
 		];
 
-		// Style Override controls.
-		$this->controls['overrideChildStyle'] = [
-			'group'       => 'styleOverride',
-			'label'       => esc_html__( 'Override Child Style Settings', 'bricks-style-guide' ),
-			'type'        => 'checkbox',
-			'rerender'    => true,
-			'description' => esc_html__( 'Enable to control swatch styling for all child items from here.', 'bricks-style-guide' ),
-		];
-
+		// Style controls (now in Variations Override group).
 		$this->controls['parentSwatchSize'] = [
-			'group'       => 'styleOverride',
+			'group'       => 'variationsOverride',
 			'label'       => esc_html__( 'Variant Swatch Size', 'bricks-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
 			'placeholder' => $examples['space_xl'],
-			'required'    => [ 'overrideChildStyle', '!=', '' ],
+			'required'    => [ 'overrideChildVariations', '!=', '' ],
 			'css'         => [
 				[
 					'property' => 'width',
@@ -333,12 +347,12 @@ class Colors extends \Bricks\Element {
 		];
 
 		$this->controls['parentBaseSize'] = [
-			'group'       => 'styleOverride',
+			'group'       => 'variationsOverride',
 			'label'       => esc_html__( 'Base Swatch Width', 'bricks-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
 			'placeholder' => $examples['space_xl'],
-			'required'    => [ 'overrideChildStyle', '!=', '' ],
+			'required'    => [ 'overrideChildVariations', '!=', '' ],
 			'css'         => [
 				[
 					'property'  => 'width',
@@ -354,12 +368,12 @@ class Colors extends \Bricks\Element {
 		];
 
 		$this->controls['parentSwatchGap'] = [
-			'group'       => 'styleOverride',
+			'group'       => 'variationsOverride',
 			'label'       => esc_html__( 'Swatch Gap', 'bricks-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
 			'placeholder' => $examples['space_3xs'],
-			'required'    => [ 'overrideChildStyle', '!=', '' ],
+			'required'    => [ 'overrideChildVariations', '!=', '' ],
 			'css'         => [
 				[
 					'property' => 'gap',
@@ -373,12 +387,12 @@ class Colors extends \Bricks\Element {
 		];
 
 		$this->controls['parentSwatchBorderRadius'] = [
-			'group'       => 'styleOverride',
+			'group'       => 'variationsOverride',
 			'label'       => esc_html__( 'Swatch Border Radius', 'bricks-style-guide' ),
 			'type'        => 'number',
 			'units'       => true,
 			'placeholder' => $examples['radius_m'],
-			'required'    => [ 'overrideChildStyle', '!=', '' ],
+			'required'    => [ 'overrideChildVariations', '!=', '' ],
 			'css'         => [
 				[
 					'property' => 'border-radius',
@@ -392,10 +406,10 @@ class Colors extends \Bricks\Element {
 		];
 
 		$this->controls['parentSwatchBorder'] = [
-			'group'    => 'styleOverride',
+			'group'    => 'variationsOverride',
 			'label'    => esc_html__( 'Swatch Border', 'bricks-style-guide' ),
 			'type'     => 'border',
-			'required' => [ 'overrideChildStyle', '!=', '' ],
+			'required' => [ 'overrideChildVariations', '!=', '' ],
 			'css'      => [
 				[
 					'property' => 'border',
@@ -408,15 +422,76 @@ class Colors extends \Bricks\Element {
 			],
 		];
 
+		// Typography Override controls.
+		$this->controls['overrideChildTypography'] = [
+			'group'       => 'typographyOverride',
+			'label'       => esc_html__( 'Override Child Typography Settings', 'bricks-style-guide' ),
+			'type'        => 'checkbox',
+			'rerender'    => true,
+			'description' => esc_html__( 'Enable to control typography for all child items from here.', 'bricks-style-guide' ),
+		];
+
 		$this->controls['labelTypography'] = [
-			'group'    => 'styleOverride',
+			'group'    => 'typographyOverride',
 			'label'    => esc_html__( 'Label Typography', 'bricks-style-guide' ),
 			'type'     => 'typography',
-			'required' => [ 'overrideChildStyle', '!=', '' ],
+			'required' => [ 'overrideChildTypography', '!=', '' ],
 			'css'      => [
 				[
 					'property' => 'font',
 					'selector' => '.bsg-colors-item__label',
+				],
+			],
+		];
+
+		$this->controls['menuHeaderTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Menu Header Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'required' => [ 'overrideChildTypography', '!=', '' ],
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-colors-item__menu-header',
+				],
+			],
+		];
+
+		$this->controls['menuCodeTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Menu Code Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'required' => [ 'overrideChildTypography', '!=', '' ],
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-colors-item__menu-var code',
+				],
+			],
+		];
+
+		$this->controls['menuButtonTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Menu Button Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'required' => [ 'overrideChildTypography', '!=', '' ],
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-colors-item__menu-btn',
+				],
+			],
+		];
+
+		$this->controls['contrastLabelTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Contrast Label Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'required' => [ 'overrideChildTypography', '!=', '' ],
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-colors-item__menu-contrast-label',
 				],
 			],
 		];
@@ -540,6 +615,12 @@ class Colors extends \Bricks\Element {
 			$this->set_attribute( '_root', 'data-show-glossary', 'true' );
 		}
 
+		// Check if A11Y switch and glossary should be hidden.
+		$hide_a11y_switch = isset( $settings['hideA11ySwitch'] );
+		if ( $hide_a11y_switch ) {
+			$this->set_attribute( '_root', 'data-hide-a11y-switch', 'true' );
+		}
+
 		$output = "<div {$this->render_attributes( '_root' )}>";
 
 		// A11Y badges toggle switch.
@@ -647,6 +728,12 @@ class Colors extends \Bricks\Element {
 				display: flex;
 				flex-direction: row;
 				flex-wrap: wrap;
+			}
+
+			/* Hide A11Y switch and glossary when setting is enabled */
+			.bsg-colors[data-hide-a11y-switch="true"] .bsg-colors__toolbar,
+			.bsg-colors[data-hide-a11y-switch="true"] .bsg-colors__glossary {
+				display: none !important;
 			}
 
 			/* Parent display override styles */

@@ -106,6 +106,11 @@ class Buttons extends \Bricks\Element {
 			'title' => esc_html__( 'Item Styling', 'bricks-style-guide' ),
 			'tab'   => 'content',
 		];
+
+		$this->control_groups['typographyOverride'] = [
+			'title' => esc_html__( 'Typography Override', 'bricks-style-guide' ),
+			'tab'   => 'content',
+		];
 	}
 
 	/**
@@ -192,6 +197,64 @@ class Buttons extends \Bricks\Element {
 			],
 		];
 
+		// Flex controls.
+		$this->controls['flexDirection'] = [
+			'group'   => 'layout',
+			'label'   => esc_html__( 'Direction', 'bricks-style-guide' ),
+			'type'    => 'direction',
+			'inline'  => true,
+			'css'     => [
+				[
+					'property' => 'flex-direction',
+					'selector' => '.bsg-buttons__grid',
+				],
+			],
+		];
+
+		$this->controls['flexWrap'] = [
+			'group'   => 'layout',
+			'label'   => esc_html__( 'Wrap', 'bricks-style-guide' ),
+			'type'    => 'select',
+			'options' => [
+				'nowrap'       => esc_html__( 'No Wrap', 'bricks-style-guide' ),
+				'wrap'         => esc_html__( 'Wrap', 'bricks-style-guide' ),
+				'wrap-reverse' => esc_html__( 'Wrap Reverse', 'bricks-style-guide' ),
+			],
+			'inline'  => true,
+			'css'     => [
+				[
+					'property' => 'flex-wrap',
+					'selector' => '.bsg-buttons__grid',
+				],
+			],
+		];
+
+		$this->controls['alignItems'] = [
+			'group'   => 'layout',
+			'label'   => esc_html__( 'Align', 'bricks-style-guide' ),
+			'type'    => 'align-items',
+			'inline'  => true,
+			'css'     => [
+				[
+					'property' => 'align-items',
+					'selector' => '.bsg-buttons__grid',
+				],
+			],
+		];
+
+		$this->controls['justifyContent'] = [
+			'group'   => 'layout',
+			'label'   => esc_html__( 'Justify', 'bricks-style-guide' ),
+			'type'    => 'justify-content',
+			'inline'  => true,
+			'css'     => [
+				[
+					'property' => 'justify-content',
+					'selector' => '.bsg-buttons__grid',
+				],
+			],
+		];
+
 		// Style preset.
 		$this->controls['stylePreset'] = [
 			'group'    => 'layout',
@@ -255,6 +318,40 @@ class Buttons extends \Bricks\Element {
 					'selector' => '.bsg-buttons-item__classes',
 				],
 			],
+		];
+
+		// Typography Override controls.
+		$this->controls['overrideChildTypography'] = [
+			'group'       => 'typographyOverride',
+			'label'       => esc_html__( 'Override Child Typography Settings', 'bricks-style-guide' ),
+			'type'        => 'checkbox',
+			'description' => esc_html__( 'Enable to control typography settings for all child items from here.', 'bricks-style-guide' ),
+		];
+
+		$this->controls['overrideDescriptionTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Description Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-buttons-item__description',
+				],
+			],
+			'required' => [ 'overrideChildTypography', '!=', '' ],
+		];
+
+		$this->controls['overrideClassesTypography'] = [
+			'group'    => 'typographyOverride',
+			'label'    => esc_html__( 'Classes Typography', 'bricks-style-guide' ),
+			'type'     => 'typography',
+			'css'      => [
+				[
+					'property' => 'font',
+					'selector' => '.bsg-buttons-item__classes',
+				],
+			],
+			'required' => [ 'overrideChildTypography', '!=', '' ],
 		];
 	}
 

@@ -347,28 +347,65 @@ class SpacingItem extends \Bricks\Element {
 			@layer bsg {
 			/* === Settings === */
 			.bsg-spacing-item {
-				--_label-font-weight: var(--bsg-spacing-item-label-font-weight, 600);
+				/* Label Typography */
+				--_label-font-family: var(--bsg-spacing-item-label-font-family, inherit);
 				--_label-font-size: var(--bsg-spacing-item-label-font-size, 0.875em);
+				--_label-font-weight: var(--bsg-spacing-item-label-font-weight, 600);
+				--_label-line-height: var(--bsg-spacing-item-label-line-height, 1.4);
+				--_label-letter-spacing: var(--bsg-spacing-item-label-letter-spacing, normal);
+				--_label-text-transform: var(--bsg-spacing-item-label-text-transform, none);
 				--_label-color: var(--bsg-spacing-item-label-color, var(--bsg-neutral-darker, #374151));
+
+				/* Variable Typography */
+				--_variable-font-family: var(--bsg-spacing-item-variable-font-family, inherit);
 				--_variable-font-size: var(--bsg-spacing-item-variable-font-size, 0.75em);
+				--_variable-font-weight: var(--bsg-spacing-item-variable-font-weight, 400);
+				--_variable-line-height: var(--bsg-spacing-item-variable-line-height, 1);
+				--_variable-letter-spacing: var(--bsg-spacing-item-variable-letter-spacing, normal);
+				--_variable-text-transform: var(--bsg-spacing-item-variable-text-transform, none);
 				--_variable-color: var(--bsg-spacing-item-variable-color, var(--bsg-neutral-medium, #6b7280));
 				--_variable-bg: var(--bsg-spacing-item-variable-bg, var(--bsg-neutral-light, #f3f4f6));
+
+				/* Value Typography */
+				--_value-font-family: var(--bsg-spacing-item-value-font-family, inherit);
+				--_value-font-size: var(--bsg-spacing-item-value-font-size, 0.75em);
+				--_value-font-weight: var(--bsg-spacing-item-value-font-weight, 400);
+				--_value-line-height: var(--bsg-spacing-item-value-line-height, 1);
+				--_value-letter-spacing: var(--bsg-spacing-item-value-letter-spacing, normal);
+				--_value-text-transform: var(--bsg-spacing-item-value-text-transform, none);
+				--_value-color: var(--bsg-spacing-item-value-color, var(--bsg-neutral-medium, #6b7280));
+
+				/* Value Label Typography */
+				--_value-label-font-family: var(--bsg-spacing-item-value-label-font-family, inherit);
+				--_value-label-font-size: var(--bsg-spacing-item-value-label-font-size, inherit);
+				--_value-label-font-weight: var(--bsg-spacing-item-value-label-font-weight, 600);
+				--_value-label-line-height: var(--bsg-spacing-item-value-label-line-height, inherit);
+				--_value-label-letter-spacing: var(--bsg-spacing-item-value-label-letter-spacing, normal);
+				--_value-label-text-transform: var(--bsg-spacing-item-value-label-text-transform, none);
+				--_value-label-color: var(--bsg-spacing-item-value-label-color, var(--bsg-neutral-darker, #374151));
+
+				/* Bar Style */
 				--_bar-color: var(--bsg-spacing-item-bar-color, var(--bsg-primary, #3b82f6));
 				--_bar-radius: var(--bsg-spacing-item-bar-radius, 0.25em);
-				--_value-font-size: var(--bsg-spacing-item-value-font-size, 0.75em);
-				--_value-color: var(--bsg-spacing-item-value-color, var(--bsg-neutral-medium, #6b7280));
-				--_value-label-color: var(--bsg-spacing-item-value-label-color, var(--bsg-neutral-darker, #374151));
 			}
 
 			.bsg-spacing-item__label {
-				font-weight: var(--_label-font-weight);
+				font-family: var(--_label-font-family);
 				font-size: var(--_label-font-size);
+				font-weight: var(--_label-font-weight);
+				line-height: var(--_label-line-height);
+				letter-spacing: var(--_label-letter-spacing);
+				text-transform: var(--_label-text-transform);
 				color: var(--_label-color);
 			}
 
 			.bsg-spacing-item__variable {
+				font-family: var(--_variable-font-family);
 				font-size: var(--_variable-font-size);
-				line-height: 1;
+				font-weight: var(--_variable-font-weight);
+				line-height: var(--_variable-line-height);
+				letter-spacing: var(--_variable-letter-spacing);
+				text-transform: var(--_variable-text-transform);
 				color: var(--_variable-color);
 				background: var(--_variable-bg);
 				padding: 0.125em 0.375em;
@@ -385,14 +422,23 @@ class SpacingItem extends \Bricks\Element {
 			}
 
 			.bsg-spacing-item__value {
+				font-family: var(--_value-font-family);
 				font-size: var(--_value-font-size);
-				line-height: 1;
+				font-weight: var(--_value-font-weight);
+				line-height: var(--_value-line-height);
+				letter-spacing: var(--_value-letter-spacing);
+				text-transform: var(--_value-text-transform);
 				color: var(--_value-color);
 				min-width: 3.125em;
 			}
 
 			.bsg-spacing-item__value-label {
-				font-weight: 600;
+				font-family: var(--_value-label-font-family);
+				font-size: var(--_value-label-font-size);
+				font-weight: var(--_value-label-font-weight);
+				line-height: var(--_value-label-line-height);
+				letter-spacing: var(--_value-label-letter-spacing);
+				text-transform: var(--_value-label-text-transform);
 				color: var(--_value-label-color);
 			}
 			} /* end @layer bsg */

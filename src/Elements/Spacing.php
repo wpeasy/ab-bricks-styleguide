@@ -221,23 +221,6 @@ class Spacing extends \Bricks\Element {
 			],
 		];
 
-		// Style preset.
-		$this->controls['stylePreset'] = [
-			'group'    => 'layout',
-			'label'    => esc_html__( 'Style Preset', 'bricks-style-guide' ),
-			'type'     => 'select',
-			'options'  => [
-				'default'   => esc_html__( 'Default', 'bricks-style-guide' ),
-				'minimal'   => esc_html__( 'Minimal', 'bricks-style-guide' ),
-				'bold'      => esc_html__( 'Bold', 'bricks-style-guide' ),
-				'colourful' => esc_html__( 'Colourful', 'bricks-style-guide' ),
-				'compact'   => esc_html__( 'Compact', 'bricks-style-guide' ),
-			],
-			'default'  => 'default',
-			'inline'   => true,
-			'rerender' => true,
-		];
-
 		// Display Override controls - apply to all child items.
 		$this->controls['overrideChildDisplay'] = [
 			'group'       => 'displayOverride',
@@ -280,6 +263,23 @@ class Spacing extends \Bricks\Element {
 		];
 
 		// Item styling controls.
+		$this->controls['stylePreset'] = [
+			'group'    => 'style',
+			'label'    => esc_html__( 'Style Preset', 'bricks-style-guide' ),
+			'type'     => 'select',
+			'options'  => [
+				'default'   => esc_html__( 'Default', 'bricks-style-guide' ),
+				'minimal'   => esc_html__( 'Minimal', 'bricks-style-guide' ),
+				'bold'      => esc_html__( 'Bold', 'bricks-style-guide' ),
+				'colourful' => esc_html__( 'Colourful', 'bricks-style-guide' ),
+				'compact'   => esc_html__( 'Compact', 'bricks-style-guide' ),
+				'cards'     => esc_html__( 'Cards', 'bricks-style-guide' ),
+			],
+			'default'  => 'default',
+			'inline'   => true,
+			'rerender' => true,
+		];
+
 		$this->controls['barColor'] = [
 			'group' => 'style',
 			'label' => esc_html__( 'Bar Color', 'bricks-style-guide' ),
@@ -598,7 +598,6 @@ class Spacing extends \Bricks\Element {
 			/* Vertical layout: bar thickness = width, height = spacing value */
 			.bsg-spacing--vertical .bsg-spacing-item__bar {
 				width: var(--bsg-bar-thickness) !important;
-				height: var(--_bar-spacing-value) !important;
 			}
 
 			@layer bsg {
@@ -686,6 +685,65 @@ class Spacing extends \Bricks\Element {
 				display: none;
 			}
 			} /* end @layer bsg */
+
+			/* Style: Cards - items as cards with background, shadow, rounded corners */
+			.bsg-spacing--cards {
+				flex-direction: row !important;
+				flex-wrap: wrap;
+				align-items: stretch !important;
+				gap: var(--bsg-space-m, 1.5rem);
+			}
+
+			.bsg-spacing--cards .bsg-spacing-item {
+				flex-direction: column !important;
+				align-items: stretch;
+				background: var(--bsg-white, #ffffff);
+				border-radius: var(--bsg-radius-m, 0.5rem);
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+				border: 1px solid var(--bsg-border-color, #e5e7eb);
+				padding: var(--bsg-space-m, 1.5rem);
+				flex: 1 1 auto;
+				min-width: 150px;
+			}
+
+			.bsg-spacing--cards .bsg-spacing-item__info {
+				order: 0;
+				min-width: auto;
+				align-items: center;
+				text-align: center;
+			}
+
+			.bsg-spacing--cards .bsg-spacing-item__bar-container {
+				order: 1;
+				flex-direction: column;
+				align-items: center;
+				height: auto !important;
+			}
+
+			.bsg-spacing--cards .bsg-spacing-item__value {
+				text-align: center;
+			}
+
+			/* Cards + Horizontal: bar uses width for spacing value, height for thickness */
+			.bsg-spacing--cards.bsg-spacing--horizontal .bsg-spacing-item__bar {
+				height: var(--bsg-bar-thickness, 1.5em) !important;
+				width: var(--_bar-spacing-value) !important;
+			}
+
+			/* Cards + Vertical: bar uses height for spacing value, width for thickness */
+			.bsg-spacing--cards.bsg-spacing--vertical .bsg-spacing-item__bar-container {
+				order: 0;
+			}
+
+			.bsg-spacing--cards.bsg-spacing--vertical .bsg-spacing-item__info {
+				order: 1;
+			}
+
+			.bsg-spacing--cards.bsg-spacing--vertical .bsg-spacing-item__bar {
+				width: var(--bsg-bar-thickness, 1.5em) !important;
+				height: var(--_bar-spacing-value) !important;
+			}
+
 		';
 	}
 }
